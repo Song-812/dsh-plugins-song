@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "dsh-session-delete",
+    "description": "A trash icon appears on hover at the end of each session row; confirming sends the session directory to the Windows Recycle Bin."
+  }
+}

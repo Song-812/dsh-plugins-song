@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "dsh-session-delete",
+    "description": "会话行右侧悬停出现垃圾桶，确认后把会话目录送进 Windows 回收站，多个窗口立即同步消失。"
+  }
+}
