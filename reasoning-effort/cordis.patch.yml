@@ -1,0 +1,7 @@
+# Bundle patch for dsh-reasoning-effort.
+# v0.3.0 起插件没有任何可配字段（配置全在 $DSH_HOME/reasoning-effort/settings.json，
+# 由 host 路由 /api/reasoning-effort 提供），所以这里不再传 config。
+
+- insert:
+    - id: reasoning-effort
+      name: dsh-reasoning-effort

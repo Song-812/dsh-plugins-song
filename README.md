@@ -19,7 +19,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
 | 启动动画 (Boot Animation) | — | 🚧 即将开源 | |
 | 玻璃主题 (Glass Theme) | — | 🚧 即将开源 | |
 | 全局规则 (Global Rules) | [`global-rules/`](./global-rules/) · `dsh-global-rules` | ✅ 已发布 | 设置页编辑 AGENTS.md；保存 / 恢复默认（清空前自动备份） |
-| 思考档位 (Thinking Levels) | — | 🚧 即将开源 | |
+| 思考档位 (Thinking Levels) | [`reasoning-effort/`](./reasoning-effort/) · `dsh-reasoning-effort` | ✅ 已发布 | 输入框模型区：推理档位滑条 + 加速档闪电开关 |
 | 技能侧栏 (Skills Sidebar) | [`skills-toggle/`](./skills-toggle/) · `dsh-skills-toggle` | ✅ 已发布 | 侧栏管理技能的「模型 / 手动」开关；分组折叠、一键开关、拖动排序与搜索 |
 | 插件侧栏 (Plugins Sidebar) | [`plugins-panel/`](./plugins-panel/) · `dsh-plugins-panel` | ✅ 已发布 | 侧栏管理自制插件开关；分组折叠、一键开关、拖动排序、搜索，并可跳转官方管理页 |
 | MCP 侧栏 (MCP Sidebar) | [`mcp-toggle/`](./mcp-toggle/) · `dsh-mcp-toggle` | ✅ 已发布 | 侧栏管理 MCP 服务器开关；分组折叠、一键开关、拖动排序与搜索 |
@@ -54,6 +54,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
     proxy-connect/    代理连接插件（已发布）
     web-connect/      网页连接插件（已发布）
     ui-hide/          UI 隐藏插件（已发布）
+    reasoning-effort/ 思考档位插件（已发布）
     LICENSE           MIT
     README.md         中文说明
     README.en.md      English

@@ -1,0 +1,8 @@
+{
+  "turboBaseModelId": "mimo-v2.6-pro",
+  "turboModelId": "mimo-v2.6-pro-ultraspeed",
+  "boltOnFlash": false,
+  "hiddenModels": [
+    "mimo-v2.6-pro-ultraspeed"
+  ]
+}
