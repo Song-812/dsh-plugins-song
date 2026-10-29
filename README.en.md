@@ -4,7 +4,7 @@ English | [简体中文](README.md)
 
 A collection of DSH plugins by Song. Updated continuously.
 
-> **Platforms**: `session-delete` needs the Windows Recycle Bin (`powershell.exe` + `shell32`) — do not install it elsewhere. `msg-notify` is a pure client alert; `skills-toggle` edits managed skill front matter and `~/.dsh/skills-toggle.json` — neither needs the Recycle Bin.
+> **Platforms**: `session-delete` needs the Windows Recycle Bin (`powershell.exe` + `shell32`) — do not install it elsewhere. `msg-notify` is a pure client alert; `skills-toggle` / `mcp-toggle` only write their own `~/.dsh/*.json` display prefs (plus skills front matter) — none of them need the Recycle Bin.
 
 ## Why
 
@@ -22,7 +22,7 @@ DSH desktop does not ship every small capability you want day to day. This repo 
 | Thinking Levels (思考档位) | — | 🚧 Coming soon | |
 | Skills Sidebar (技能侧栏) | [`skills-toggle/`](./skills-toggle/) · `dsh-skills-toggle` | ✅ Available | Sidebar toggles for model / manual invocation; group collapse, bulk knob, drag reorder, search |
 | Plugins Sidebar (插件侧栏) | — | 🚧 Coming soon | |
-| MCP Sidebar (MCP侧栏) | — | 🚧 Coming soon | |
+| MCP Sidebar (MCP侧栏) | [`mcp-toggle/`](./mcp-toggle/) · `dsh-mcp-toggle` | ✅ Available | Sidebar MCP enable/disable; group collapse, bulk knob, drag reorder, search |
 | UI Hide (UI隐藏) | — | 🚧 Coming soon | |
 | Proxy Connect (代理连接) | — | 🚧 Coming soon | |
 | Web Connect (网页连接) | — | 🚧 Coming soon | |
@@ -37,7 +37,7 @@ DSH desktop does not ship every small capability you want day to day. This repo 
 
 | Need | Notes |
 |---|---|
-| Windows (`session-delete` only) | Recycle Bin bridge needs `powershell.exe` and `shell32.dll`. `msg-notify` is a pure client alert; `skills-toggle` edits managed skill front matter and `~/.dsh/skills-toggle.json` — neither needs the Recycle Bin |
+| Windows (`session-delete` only) | Recycle Bin bridge needs `powershell.exe` and `shell32.dll`. `msg-notify` is a pure client alert; `skills-toggle` / `mcp-toggle` only write their own `~/.dsh/*.json` display prefs (plus skills front matter) — none of them need the Recycle Bin |
 | Node.js ≥ 18 | Required to run tests; installing the plugin itself goes through DSH |
 
 ## Layout
@@ -45,6 +45,7 @@ DSH desktop does not ship every small capability you want day to day. This repo 
     session-delete/   Session Delete plugin (published)
     msg-notify/       Message Notice plugin (published)
     skills-toggle/    Skills Sidebar plugin (published)
+    mcp-toggle/       MCP Sidebar plugin (published)
     LICENSE           MIT
     README.md         Chinese
     README.en.md      English
@@ -55,7 +56,7 @@ Each published plugin has `node --test ./test/*.test.js`. Recycle Bin cases crea
 
 ## Known limitations
 
-- `session-delete` is **Windows only** (it needs the Recycle Bin). `msg-notify` is a pure client alert; `skills-toggle` edits managed skill front matter and `~/.dsh/skills-toggle.json` — neither needs the Recycle Bin
+- `session-delete` is **Windows only** (it needs the Recycle Bin). `msg-notify` is a pure client alert; `skills-toggle` / `mcp-toggle` only write their own `~/.dsh/*.json` display prefs (plus skills front matter) — none of them need the Recycle Bin
 - “Coming soon” rows are placeholders; directories and package names will be filled in later
 
 ## License
