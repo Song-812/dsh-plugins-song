@@ -4,7 +4,7 @@
 
 Song 自制的 DSH 插件合集，持续更新。
 
-> **平台说明**：`session-delete` 依赖 Windows 回收站（`powershell.exe` + `shell32`），其它平台请勿装它。`msg-notify` 是纯客户端提醒；`skills-toggle` / `mcp-toggle` / `plugins-panel` 只写各自的 `~/.dsh/*.json` 显示偏好（及 skills 的 front matter），也不依赖回收站。
+> **平台说明**：`session-delete` 依赖 Windows 回收站（`powershell.exe` + `shell32`），其它平台请勿装它。`msg-notify` 是纯客户端提醒；`skills-toggle` / `mcp-toggle` / `plugins-panel` 只写各自的 `~/.dsh/*.json` 显示偏好（及 skills 的 front matter）；`global-rules` 编辑 `$DSH_HOME/AGENTS.md`（默认 `~/.dsh/AGENTS.md`）——以上都不依赖回收站。
 
 ## 它解决什么问题
 
@@ -18,7 +18,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
 | 消息提示 (Message Notice) | [`msg-notify/`](./msg-notify/) · `dsh-msg-notify` | ✅ 已发布 | 需要回答 / 输出完成 / 发生错误 / 卡住：四类场景各配提示音（音色与重复可调） |
 | 启动动画 (Boot Animation) | — | 🚧 即将开源 | |
 | 玻璃主题 (Glass Theme) | — | 🚧 即将开源 | |
-| 全局规则 (Global Rules) | — | 🚧 即将开源 | |
+| 全局规则 (Global Rules) | [`global-rules/`](./global-rules/) · `dsh-global-rules` | ✅ 已发布 | 设置页编辑 AGENTS.md；保存 / 恢复默认（清空前自动备份） |
 | 思考档位 (Thinking Levels) | — | 🚧 即将开源 | |
 | 技能侧栏 (Skills Sidebar) | [`skills-toggle/`](./skills-toggle/) · `dsh-skills-toggle` | ✅ 已发布 | 侧栏管理技能的「模型 / 手动」开关；分组折叠、一键开关、拖动排序与搜索 |
 | 插件侧栏 (Plugins Sidebar) | [`plugins-panel/`](./plugins-panel/) · `dsh-plugins-panel` | ✅ 已发布 | 侧栏管理自制插件开关；分组折叠、一键开关、拖动排序、搜索，并可跳转官方管理页 |
@@ -39,7 +39,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
 
 | 需要 | 说明 |
 |---|---|
-| Windows（仅 `session-delete`） | 回收站桥依赖 `powershell.exe` 与 `shell32.dll`。`msg-notify` 是纯客户端；`skills-toggle` / `mcp-toggle` / `plugins-panel` 只写各自的 `~/.dsh/*.json` 显示偏好（及 skills 的 front matter），也不依赖回收站 |
+| Windows（仅 `session-delete`） | 回收站桥依赖 `powershell.exe` 与 `shell32.dll`。`msg-notify` 是纯客户端；`skills-toggle` / `mcp-toggle` / `plugins-panel` 只写各自的 `~/.dsh/*.json` 显示偏好（及 skills 的 front matter）；`global-rules` 编辑 `$DSH_HOME/AGENTS.md`（默认 `~/.dsh/AGENTS.md`）——以上都不依赖回收站 |
 | Node.js ≥ 18 | 跑插件测试时需要；装插件本身走 DSH |
 
 ## 项目结构
@@ -49,6 +49,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
     skills-toggle/    技能侧栏插件（已发布）
     mcp-toggle/       MCP 侧栏插件（已发布）
     plugins-panel/    插件侧栏插件（已发布）
+    global-rules/     全局规则插件（已发布）
     LICENSE           MIT
     README.md         中文说明
     README.en.md      English
@@ -59,7 +60,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
 
 ## 已知限制
 
-- `session-delete` **只在 Windows 上能用**（依赖系统回收站）。`msg-notify` 是纯客户端提醒；`skills-toggle` / `mcp-toggle` / `plugins-panel` 只写各自的 `~/.dsh/*.json` 显示偏好（及 skills 的 front matter），也不依赖回收站
+- `session-delete` **只在 Windows 上能用**（依赖系统回收站）。`msg-notify` 是纯客户端提醒；`skills-toggle` / `mcp-toggle` / `plugins-panel` 只写各自的 `~/.dsh/*.json` 显示偏好（及 skills 的 front matter）；`global-rules` 编辑 `$DSH_HOME/AGENTS.md`（默认 `~/.dsh/AGENTS.md`）——以上都不依赖回收站
 - 「即将开源」的条目还在整理，目录与包名以后补上
 
 ## 许可证

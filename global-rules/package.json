@@ -1,0 +1,60 @@
+{
+  "name": "dsh-global-rules",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "DSH 设置页里的全局规则编辑器：读写 AGENTS.md，支持恢复默认（清空前自动备份）。",
+  "author": "Song-812",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Song-812/dsh-plugins-song.git",
+    "directory": "global-rules"
+  },
+  "homepage": "https://github.com/Song-812/dsh-plugins-song/tree/main/global-rules",
+  "bugs": {
+    "url": "https://github.com/Song-812/dsh-plugins-song/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "plugin",
+    "agents",
+    "instructions",
+    "global-rules",
+    "settings"
+  ],
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "lib",
+    "locale",
+    "cordis.patch.yml",
+    "README.md",
+    "README.en.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}
