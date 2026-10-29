@@ -4,7 +4,7 @@ English | [简体中文](README.md)
 
 A collection of DSH plugins by Song. Updated continuously.
 
-> **Windows only**: plugins here need the Windows Recycle Bin (`powershell.exe` + `shell32`). Do not install on other platforms.
+> **Platforms**: `session-delete` needs the Windows Recycle Bin (`powershell.exe` + `shell32`) — do not install it elsewhere. `msg-notify` is a pure client alert and does not use the Recycle Bin.
 
 ## Why
 
@@ -15,7 +15,7 @@ DSH desktop does not ship every small capability you want day to day. This repo 
 | Plugin | Directory / Package | Status | What it does |
 |---|---|---|---|
 | Session Delete (会话删除) | [`session-delete/`](./session-delete/) · `dsh-session-delete` | ✅ Available | Hover trash on each session row; confirming sends the session folder to the **Windows Recycle Bin** |
-| Message Notice (消息提示) | — | 🚧 Coming soon | |
+| Message Notice (消息提示) | [`msg-notify/`](./msg-notify/) · `dsh-msg-notify` | ✅ Available | Four tones: needs-answer / complete / error / stalled (tone + repeat per kind) |
 | Boot Animation (启动动画) | — | 🚧 Coming soon | |
 | Glass Theme (玻璃主题) | — | 🚧 Coming soon | |
 | Global Rules (全局规则) | — | 🚧 Coming soon | |
@@ -37,12 +37,13 @@ DSH desktop does not ship every small capability you want day to day. This repo 
 
 | Need | Notes |
 |---|---|
-| Windows | Recycle Bin bridge needs `powershell.exe` and `shell32.dll` |
+| Windows (`session-delete` only) | Recycle Bin bridge needs `powershell.exe` and `shell32.dll`. `msg-notify` is a pure client alert and does not use the Recycle Bin |
 | Node.js ≥ 18 | Required to run tests; installing the plugin itself goes through DSH |
 
 ## Layout
 
     session-delete/   Session Delete plugin (published)
+    msg-notify/       Message Notice plugin (published)
     LICENSE           MIT
     README.md         Chinese
     README.en.md      English
@@ -53,7 +54,7 @@ Each published plugin has `node --test ./test/*.test.js`. Recycle Bin cases crea
 
 ## Known limitations
 
-- Published plugins are **Windows only**
+- `session-delete` is **Windows only** (it needs the Recycle Bin). `msg-notify` is a pure client alert and does not use the Recycle Bin
 - “Coming soon” rows are placeholders; directories and package names will be filled in later
 
 ## License
