@@ -34,7 +34,7 @@ Notes:
 - Verify path reuses the agent-visible chrome-devtools tools; fails clearly if MCP is off or unauthorized.
 - Stays **independent of other egress-related plugins**: auth uses native Node HTTP(S), not a web-fetch provider; does not change global proxy or Chrome settings. System proxy / TUN effects depend on the local desktop instance.
 
-Tool descriptions plus a lifecycle `systemPrompt` section point agents at the new entry and away from legacy `open_dsh_web.cmd` / `dsh_web_auth.py`-style suggestions (do not run the old scripts alongside).
+Tool descriptions plus a lifecycle `systemPrompt` section point agents at the new entry and away from old local launcher scripts (do not run the old scripts alongside).
 
 ## Layout
 

@@ -613,7 +613,7 @@ window.__ModuleLoader__.load({
     }
 
 
-    /* 思考档位浮层（.dsh-reasoning-model__popover）也用 role=dialog，会被上面 dialog 磨砂误伤。
+    /* 其他插件的浮层（.dsh-reasoning-model__popover）也用 role=dialog，会被上面 dialog 磨砂误伤。
        对齐 / 面板与模型菜单实底（T4），去掉透明底与 blur。 */
     html[data-glass] body .dsh-reasoning-model__popover[role=dialog],
     html[data-glass] body .dsh-reasoning-model__popover{
@@ -1003,7 +1003,7 @@ window.__ModuleLoader__.load({
     html[data-glass] [data-gx-overlay-sb]:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:1px}
     @media(prefers-reduced-motion:reduce){html[data-glass] [data-gx-overlay-sb]{transition:none}}
 
-    /* 官方设置 · 账号与余额：沿用现有两组容器，只统一成消息提示页的浅底卡。
+    /* 官方设置 · 账号与余额：沿用现有两组容器，只统一成其他插件的设置页的浅底卡。
        精确限定设置弹窗与直属卡片；不影响充值主按钮、登录弹窗或平台付款页。
        官方类名变更时本规则自然失效，保留官方界面。 */
     html[data-glass] [data-shortcut-modal="settings"] section._6qcDqa_section
@@ -1043,7 +1043,7 @@ window.__ModuleLoader__.load({
       .Iwzhua_themeCube.Iwzhua_selected{
       background:var(--glass-accent);
       color:var(--dsw-alias-label-primary-foreground);
-    }\r
+    }
 
     /* 模型设置页：只统一外层卡片和普通控件的平时底色。 */
     html[data-glass] [data-shortcut-modal="settings"] .jrmgQW_section :is(.jrmgQW_rowCard,.jrmgQW_addCard,.jrmgQW_setupCard) {
@@ -1051,7 +1051,7 @@ window.__ModuleLoader__.load({
     }
     html[data-glass] [data-shortcut-modal="settings"] .jrmgQW_section :is(.jrmgQW_secondaryButton:not(:hover),.jrmgQW_addButton:not(:hover),.jrmgQW_input:not(:hover):not(:focus-within)):not(:disabled) {
       background-color: color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);
-    }\r
+    }
 
     /* 模型页：保留编辑区层次，删除按钮使用系统主按钮配色。 */
     html[data-glass] [data-shortcut-modal="settings"] .jrmgQW_section .jrmgQW_rowCard .jrmgQW_editor {
@@ -1063,7 +1063,7 @@ window.__ModuleLoader__.load({
     }
     html[data-glass] [data-shortcut-modal="settings"] .jrmgQW_section .jrmgQW_rowActions .jrmgQW_dangerButton:hover:not(:disabled) {
       background-color:var(--dsw-alias-button-primary-hover);
-    }\r
+    }
 
     /* 官方设置 · 内置插件：只统一列表卡片、展开详情和普通控件的底色。 */
     html[data-glass] [data-shortcut-modal="settings"] .qgYWUG_section .qgYWUG_card {
@@ -1074,7 +1074,7 @@ window.__ModuleLoader__.load({
     }
     html[data-glass] [data-shortcut-modal="settings"] .qgYWUG_section :is(.qgYWUG_search input,.qgYWUG_switcher):not(:disabled):not(:hover):not(:focus-within) {
       background-color:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);
-    }\r
+    }
 
     /* 内置插件列表的标识与状态标签：柔化底色，保留各状态文字颜色。 */
     html[data-glass] [data-shortcut-modal="settings"] .qgYWUG_section .qgYWUG_cardIdentity,
@@ -1083,7 +1083,7 @@ window.__ModuleLoader__.load({
     }
     html[data-glass] [data-shortcut-modal="settings"] .qgYWUG_section .qgYWUG_cardTrailing ._tag_brmue_4:is([data-tone="warning"],[data-tone="info"],[data-tone="danger"]) {
       background-color:color-mix(in srgb,currentColor 6%,transparent);
-    }\r
+    }
 
     /* 官方 Agent 预设：卡片、创建入口和两个弹窗内的阅读区域。 */
     html[data-glass] [data-shortcut-modal="settings"] .Wsg8iW_section :is(.Wsg8iW_card:not(:hover),.Wsg8iW_cardActive) {
@@ -1095,7 +1095,7 @@ window.__ModuleLoader__.load({
     html[data-glass] .Fi3Lcq_guideDialog .Fi3Lcq_guidePanel blockquote,
     html[data-glass] .Wsg8iW_dialog .Wsg8iW_viewerCode {
       background-color:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 60%,transparent);
-    }\r
+    }
 
     /* Agent 预设指南：仅调整分段栏底色与状态颜色。 */
     html[data-glass] .Fi3Lcq_guideDialog .Fi3Lcq_guideTabs {
@@ -1109,176 +1109,176 @@ window.__ModuleLoader__.load({
     }
     html[data-glass] .Fi3Lcq_guideDialog .Fi3Lcq_guideTabs [role="tab"][aria-selected="false"]:hover {
       background-color:var(--dsw-alias-interactive-bg-hover);
-    }\r
+    }
 
     /* Agent 预设指南：柔化示例任务标签的底色。 */
     html[data-glass] .Fi3Lcq_guideDialog .Fi3Lcq_guideExampleTag[data-tone="neutral"] {
       background-color:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 45%,transparent);
-    }\r
+    }
     `;
 
     // src/client/settings.css
-    var settings_default = `/* 玻璃主题 · 设置页\r
-     * 结构：页头（玻璃主题 + 恢复默认）/ 三张分组卡（主题、背景、特效）。\r
-     * 颜色全部走宿主 token，明暗两套主题都成立。\r
-     */\r
-    \r
-    .gx-page{\r
-      display:flex;flex-direction:column;gap:8px;\r
-      padding:12px 0 14px;max-width:600px;\r
-      color:var(--dsw-alias-label-primary);\r
-      font-family:var(--dsw-font-family);\r
-    }\r
-    \r
-    /* ---------- 页头 ---------- */\r
-    .gx-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px;margin:0 0 4px;padding:0}\r
-    /* 四档字阶：总标题 > 区块标题 > 选项标题 > 说明文 */\r
-    .gx-title{\r
-      font-family:var(--dsw-font-family);\r
-      font-size:17px;font-weight:700;line-height:24px;margin:0;\r
-      letter-spacing:.06em;\r
-    }\r
-    /* ---------- 分组卡 ---------- */\r
-    .gx-card{\r
-      border-radius:12px;padding:2px 18px 4px;\r
-      background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 34%,transparent);\r
-      box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 10%,transparent);\r
-    }\r
-    .gx-card-title{\r
-      font-family:var(--dsw-font-family);\r
-      font-size:15px;font-weight:650;line-height:22px;margin:0 0 18px;padding-top:10px;\r
-      letter-spacing:.05em;\r
-      color:var(--dsw-alias-label-primary);\r
-    }\r
-    \r
-    /* ---------- 行 ---------- */\r
-    .gx-row{\r
-      display:flex;align-items:center;justify-content:space-between;gap:24px;\r
-      padding:8px 0;border-bottom:1px solid color-mix(in srgb,var(--dsw-alias-label-primary) 10%,transparent);\r
-    }\r
-    .gx-card .gx-row:last-child{border-bottom:0}\r
-    .gx-row-text{min-width:0}\r
-    /* 选项/说明改用系统 UI 栈，比主题字更素 */\r
-    .gx-row-title{\r
-      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;\r
-      font-size:13.5px;font-weight:500;line-height:20px;letter-spacing:0;\r
-    }\r
-    .gx-row-desc{\r
-      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;\r
-      font-size:12px;font-weight:400;line-height:18px;margin-top:3px;max-width:300px;\r
-      letter-spacing:0;\r
-      color:color-mix(in srgb,var(--dsw-alias-label-secondary) 68%,transparent);\r
-    }\r
-    .gx-control{display:flex;align-items:center;gap:8px;flex:0 0 auto}\r
-    \r
-    /* ---------- 开关 ---------- */\r
-    .gx-switch{\r
-      width:36px;height:20px;border-radius:999px;corner-shape:round;border:0;padding:0;cursor:pointer;position:relative;\r
-      background:color-mix(in srgb,var(--dsw-alias-label-primary) 22%,transparent);\r
-      transition:background .18s;flex:0 0 auto;\r
-    }\r
-    .gx-switch::after{\r
-      content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;corner-shape:round;\r
-      background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:left .18s;\r
-    }\r
-    .gx-switch[aria-checked=true]{background:var(--glass-accent)}\r
-    .gx-switch[aria-checked=true]::after{left:18px}\r
-    .gx-switch:focus-visible{outline:2px solid color-mix(in srgb,var(--glass-accent) 80%,transparent);outline-offset:2px}\r
-    \r
-    /* ---------- 滑杆 + 数字框 ---------- */\r
-    .gx-range{\r
-      width:186px;height:20px;appearance:none;-webkit-appearance:none;background:transparent;margin:0;\r
-      flex:0 1 186px;min-width:36px;\r
-      --gx-fill:50%;\r
-    }\r
-    .gx-range::-webkit-slider-runnable-track{\r
-      height:4px;border-radius:999px;\r
-      background:linear-gradient(to right,var(--glass-accent) 0 var(--gx-fill),color-mix(in srgb,var(--dsw-alias-label-primary) 15%,transparent) var(--gx-fill) 100%);\r
-    }\r
-    .gx-range::-webkit-slider-thumb{\r
-      -webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;margin-top:-5px;\r
-      box-shadow:0 0 0 .5px rgba(19,45,83,.30),0 1px 2px rgba(0,0,0,.18);cursor:pointer;\r
-    }\r
-    .gx-control:has(.gx-range){flex:0 1 auto;min-width:0;max-width:100%}\r
-    .gx-num{display:flex;align-items:center;gap:6px;flex:none}\r
-    .gx-stepper{position:relative;width:52px;height:32px;flex:none}\r
-    .gx-stepper input{\r
-      box-sizing:border-box;width:52px;height:32px;border:0;border-radius:var(--dsw-radius-md,8px);padding:0;text-align:center;\r
-      background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);\r
-      box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 14%,transparent),0 1px 2px rgba(19,45,83,.06);\r
-      font:inherit;font-size:13.5px;color:var(--dsw-alias-label-primary);\r
-      font-variant-numeric:tabular-nums;appearance:textfield;-moz-appearance:textfield;\r
-    }\r
+    var settings_default = `/* 玻璃主题 · 设置页
+     * 结构：页头（玻璃主题 + 恢复默认）/ 三张分组卡（主题、背景、特效）。
+     * 颜色全部走宿主 token，明暗两套主题都成立。
+     */
+    
+    .gx-page{
+      display:flex;flex-direction:column;gap:8px;
+      padding:12px 0 14px;max-width:600px;
+      color:var(--dsw-alias-label-primary);
+      font-family:var(--dsw-font-family);
+    }
+    
+    /* ---------- 页头 ---------- */
+    .gx-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px;margin:0 0 4px;padding:0}
+    /* 四档字阶：总标题 > 区块标题 > 选项标题 > 说明文 */
+    .gx-title{
+      font-family:var(--dsw-font-family);
+      font-size:17px;font-weight:700;line-height:24px;margin:0;
+      letter-spacing:.06em;
+    }
+    /* ---------- 分组卡 ---------- */
+    .gx-card{
+      border-radius:12px;padding:2px 18px 4px;
+      background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 34%,transparent);
+      box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 10%,transparent);
+    }
+    .gx-card-title{
+      font-family:var(--dsw-font-family);
+      font-size:15px;font-weight:650;line-height:22px;margin:0 0 18px;padding-top:10px;
+      letter-spacing:.05em;
+      color:var(--dsw-alias-label-primary);
+    }
+    
+    /* ---------- 行 ---------- */
+    .gx-row{
+      display:flex;align-items:center;justify-content:space-between;gap:24px;
+      padding:8px 0;border-bottom:1px solid color-mix(in srgb,var(--dsw-alias-label-primary) 10%,transparent);
+    }
+    .gx-card .gx-row:last-child{border-bottom:0}
+    .gx-row-text{min-width:0}
+    /* 选项/说明改用系统 UI 栈，比主题字更素 */
+    .gx-row-title{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+      font-size:13.5px;font-weight:500;line-height:20px;letter-spacing:0;
+    }
+    .gx-row-desc{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+      font-size:12px;font-weight:400;line-height:18px;margin-top:3px;max-width:300px;
+      letter-spacing:0;
+      color:color-mix(in srgb,var(--dsw-alias-label-secondary) 68%,transparent);
+    }
+    .gx-control{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+    
+    /* ---------- 开关 ---------- */
+    .gx-switch{
+      width:36px;height:20px;border-radius:999px;corner-shape:round;border:0;padding:0;cursor:pointer;position:relative;
+      background:color-mix(in srgb,var(--dsw-alias-label-primary) 22%,transparent);
+      transition:background .18s;flex:0 0 auto;
+    }
+    .gx-switch::after{
+      content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;corner-shape:round;
+      background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:left .18s;
+    }
+    .gx-switch[aria-checked=true]{background:var(--glass-accent)}
+    .gx-switch[aria-checked=true]::after{left:18px}
+    .gx-switch:focus-visible{outline:2px solid color-mix(in srgb,var(--glass-accent) 80%,transparent);outline-offset:2px}
+    
+    /* ---------- 滑杆 + 数字框 ---------- */
+    .gx-range{
+      width:186px;height:20px;appearance:none;-webkit-appearance:none;background:transparent;margin:0;
+      flex:0 1 186px;min-width:36px;
+      --gx-fill:50%;
+    }
+    .gx-range::-webkit-slider-runnable-track{
+      height:4px;border-radius:999px;
+      background:linear-gradient(to right,var(--glass-accent) 0 var(--gx-fill),color-mix(in srgb,var(--dsw-alias-label-primary) 15%,transparent) var(--gx-fill) 100%);
+    }
+    .gx-range::-webkit-slider-thumb{
+      -webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;margin-top:-5px;
+      box-shadow:0 0 0 .5px rgba(19,45,83,.30),0 1px 2px rgba(0,0,0,.18);cursor:pointer;
+    }
+    .gx-control:has(.gx-range){flex:0 1 auto;min-width:0;max-width:100%}
+    .gx-num{display:flex;align-items:center;gap:6px;flex:none}
+    .gx-stepper{position:relative;width:52px;height:32px;flex:none}
+    .gx-stepper input{
+      box-sizing:border-box;width:52px;height:32px;border:0;border-radius:var(--dsw-radius-md,8px);padding:0;text-align:center;
+      background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);
+      box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 14%,transparent),0 1px 2px rgba(19,45,83,.06);
+      font:inherit;font-size:13.5px;color:var(--dsw-alias-label-primary);
+      font-variant-numeric:tabular-nums;appearance:textfield;-moz-appearance:textfield;
+    }
     .gx-stepper:hover input,.gx-stepper:focus-within input{background:var(--dsw-alias-bg-module-platform)}
-    .gx-stepper input::-webkit-inner-spin-button,.gx-stepper input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}\r
-    .gx-stepper input:focus-visible,.gx-stepper-arrows button:focus-visible{outline:2px solid var(--glass-accent);outline-offset:1px}\r
-    .gx-stepper-arrows{position:absolute;right:2px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;opacity:0;pointer-events:none}\r
-    .gx-stepper:hover .gx-stepper-arrows,.gx-stepper:focus-within .gx-stepper-arrows{opacity:1;pointer-events:auto}\r
-    .gx-stepper-arrows button{\r
-      box-sizing:border-box;width:10px;height:10px;padding:0;border:0;border-radius:var(--dsw-radius-xs,4px);\r
-      display:inline-flex;align-items:center;justify-content:center;cursor:pointer;\r
-      color:var(--dsw-alias-label-primary);background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 75%,transparent);\r
-    }\r
-    .gx-stepper-arrows button:hover:not(:disabled){background:var(--dsw-alias-bg-layer-1)}\r
-    .gx-stepper-arrows button:disabled{opacity:.45;cursor:default}\r
-    .gx-unit{font-size:12px;min-width:14px;color:color-mix(in srgb,var(--dsw-alias-label-secondary) 50%,transparent)}\r
-    \r
-    /* ---------- 按钮 / 壁纸 ---------- */\r
-    .gx-btn{\r
-      box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;flex:none;\r
-      height:32px;padding:0 12px;border:0;border-radius:var(--dsw-radius-md,8px);cursor:pointer;white-space:nowrap;\r
-      background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);\r
-      box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 14%,transparent),0 1px 2px rgba(19,45,83,.06);\r
-      font-family:inherit;font-size:13px;line-height:20px;color:var(--dsw-alias-label-primary);\r
-    }\r
-    .gx-btn:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover)}\r
-    .gx-btn:disabled{opacity:.5;cursor:default}\r
+    .gx-stepper input::-webkit-inner-spin-button,.gx-stepper input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+    .gx-stepper input:focus-visible,.gx-stepper-arrows button:focus-visible{outline:2px solid var(--glass-accent);outline-offset:1px}
+    .gx-stepper-arrows{position:absolute;right:2px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;opacity:0;pointer-events:none}
+    .gx-stepper:hover .gx-stepper-arrows,.gx-stepper:focus-within .gx-stepper-arrows{opacity:1;pointer-events:auto}
+    .gx-stepper-arrows button{
+      box-sizing:border-box;width:10px;height:10px;padding:0;border:0;border-radius:var(--dsw-radius-xs,4px);
+      display:inline-flex;align-items:center;justify-content:center;cursor:pointer;
+      color:var(--dsw-alias-label-primary);background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 75%,transparent);
+    }
+    .gx-stepper-arrows button:hover:not(:disabled){background:var(--dsw-alias-bg-layer-1)}
+    .gx-stepper-arrows button:disabled{opacity:.45;cursor:default}
+    .gx-unit{font-size:12px;min-width:14px;color:color-mix(in srgb,var(--dsw-alias-label-secondary) 50%,transparent)}
+    
+    /* ---------- 按钮 / 壁纸 ---------- */
+    .gx-btn{
+      box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;flex:none;
+      height:32px;padding:0 12px;border:0;border-radius:var(--dsw-radius-md,8px);cursor:pointer;white-space:nowrap;
+      background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);
+      box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 14%,transparent),0 1px 2px rgba(19,45,83,.06);
+      font-family:inherit;font-size:13px;line-height:20px;color:var(--dsw-alias-label-primary);
+    }
+    .gx-btn:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover)}
+    .gx-btn:disabled{opacity:.5;cursor:default}
     .gx-btn.danger{background:var(--dsw-alias-button-primary-fill);color:var(--dsw-alias-label-primary-foreground)}
-    .gx-btn.danger:hover:not(:disabled){background:var(--dsw-alias-button-primary-hover)}\r
-    .gx-wallpaper{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:420px}\r
-    .gx-thumb{\r
-      width:84px;height:48px;border-radius:8px;overflow:hidden;flex:0 0 auto;background:#dbe4ef;\r
-      box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 14%,transparent);\r
-    }\r
-    .gx-thumb img,.gx-thumb video{width:100%;height:100%;object-fit:cover;display:block}\r
-    .gx-thumb-empty{\r
-      width:100%;height:100%;display:flex;align-items:center;justify-content:center;\r
-      font-size:11px;color:color-mix(in srgb,var(--dsw-alias-label-secondary) 60%,transparent);\r
-    }\r
-    .gx-note{\r
-      margin:6px 0 0;font-size:12px;line-height:18px;\r
-      color:color-mix(in srgb,var(--dsw-alias-label-secondary) 68%,transparent);\r
-    }\r
-    .gx-error{color:#C8436F}\r
-    \r
-    /* ---------- 重点色 ---------- */\r
-    .gx-swatches{display:flex;align-items:center;gap:6px}\r
-    .gx-sw{\r
-      width:18px;height:18px;border-radius:50%;border:0;padding:0;cursor:pointer;\r
-      background:var(--gx-c);\r
-      box-shadow:0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 24%,transparent);\r
-    }\r
-    .gx-sw.on{box-shadow:0 0 0 2px var(--dsw-alias-bg-layer-1),0 0 0 3.5px color-mix(in srgb,var(--dsw-alias-label-primary) 38%,transparent)}\r
-    .gx-sw.white{box-shadow:0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 34%,transparent)}\r
-    .gx-sw.white.on{box-shadow:0 0 0 2px var(--dsw-alias-bg-layer-1),0 0 0 3.5px color-mix(in srgb,var(--dsw-alias-label-primary) 38%,transparent)}\r
-    .gx-custom{\r
-      position:relative;width:22px;height:22px;border-radius:50%;border:0;padding:0;cursor:pointer;flex:0 0 auto;\r
-      background:conic-gradient(from 30deg,#f77,#fc6,#ff6,#7d7,#6cf,#a7f,#f77);\r
-    }\r
-    .gx-custom::after{\r
-      content:"";position:absolute;inset:3px;border-radius:50%;background:var(--glass-accent);\r
-      box-shadow:inset 0 0 0 .5px rgba(255,255,255,.5);\r
-    }\r
-    .gx-custom input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0}\r
-    .gx-hex{\r
-      font-size:12px;min-width:58px;letter-spacing:.02em;font-variant-numeric:tabular-nums;\r
-      color:color-mix(in srgb,var(--dsw-alias-label-secondary) 50%,transparent);\r
-    }\r
-    \r
-    /* ---------- 深色微调 ---------- */\r
-    body[data-ds-dark-theme] .gx-thumb{background:#243141}\r
-    \r
-    body[data-ds-dark-theme] .gx-error{color:#F08CAE}\r
+    .gx-btn.danger:hover:not(:disabled){background:var(--dsw-alias-button-primary-hover)}
+    .gx-wallpaper{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:420px}
+    .gx-thumb{
+      width:84px;height:48px;border-radius:8px;overflow:hidden;flex:0 0 auto;background:#dbe4ef;
+      box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 14%,transparent);
+    }
+    .gx-thumb img,.gx-thumb video{width:100%;height:100%;object-fit:cover;display:block}
+    .gx-thumb-empty{
+      width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+      font-size:11px;color:color-mix(in srgb,var(--dsw-alias-label-secondary) 60%,transparent);
+    }
+    .gx-note{
+      margin:6px 0 0;font-size:12px;line-height:18px;
+      color:color-mix(in srgb,var(--dsw-alias-label-secondary) 68%,transparent);
+    }
+    .gx-error{color:#C8436F}
+    
+    /* ---------- 重点色 ---------- */
+    .gx-swatches{display:flex;align-items:center;gap:6px}
+    .gx-sw{
+      width:18px;height:18px;border-radius:50%;border:0;padding:0;cursor:pointer;
+      background:var(--gx-c);
+      box-shadow:0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 24%,transparent);
+    }
+    .gx-sw.on{box-shadow:0 0 0 2px var(--dsw-alias-bg-layer-1),0 0 0 3.5px color-mix(in srgb,var(--dsw-alias-label-primary) 38%,transparent)}
+    .gx-sw.white{box-shadow:0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 34%,transparent)}
+    .gx-sw.white.on{box-shadow:0 0 0 2px var(--dsw-alias-bg-layer-1),0 0 0 3.5px color-mix(in srgb,var(--dsw-alias-label-primary) 38%,transparent)}
+    .gx-custom{
+      position:relative;width:22px;height:22px;border-radius:50%;border:0;padding:0;cursor:pointer;flex:0 0 auto;
+      background:conic-gradient(from 30deg,#f77,#fc6,#ff6,#7d7,#6cf,#a7f,#f77);
+    }
+    .gx-custom::after{
+      content:"";position:absolute;inset:3px;border-radius:50%;background:var(--glass-accent);
+      box-shadow:inset 0 0 0 .5px rgba(255,255,255,.5);
+    }
+    .gx-custom input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0}
+    .gx-hex{
+      font-size:12px;min-width:58px;letter-spacing:.02em;font-variant-numeric:tabular-nums;
+      color:color-mix(in srgb,var(--dsw-alias-label-secondary) 50%,transparent);
+    }
+    
+    /* ---------- 深色微调 ---------- */
+    body[data-ds-dark-theme] .gx-thumb{background:#243141}
+    
+    body[data-ds-dark-theme] .gx-error{color:#F08CAE}
     `;
 
     // src/shared/settings.ts

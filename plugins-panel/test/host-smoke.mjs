@@ -20,7 +20,7 @@ const profileDir = path.join(home, 'profiles', 'desktop')
 mkdirSync(profileDir, { recursive: true })
 writeFileSync(path.join(profileDir, 'package.json'), JSON.stringify({
   dependencies: {
-    'dsh-mcp-toggle': 'link:C:/work/MCP开关',
+    'dsh-example-plugin': 'link:./example-plugin',
     'dsh-local-file': 'file:../local',
     '@deepseek-ai/dsh-cordis': '^1.0.0',
     'plain-package': '2.0.0',
@@ -48,7 +48,7 @@ check('垃圾输入返回空对象', JSON.stringify(sanitizePrefs(null)) === '{}
 
 // 2. 自制/内置判定：只认 link: 与 file:
 const self = selfMadeModules(profileDir)
-check('只有 link:/file: 的算自制', self.join('|') === 'dsh-local-file|dsh-mcp-toggle', self.join('|'))
+check('只有 link:/file: 的算自制', self.join('|') === 'dsh-example-plugin|dsh-local-file', self.join('|'))
 check('读不到 profile 时返回空表而不是抛错', selfMadeModules(path.join(home, 'nope')).length === 0)
 
 // 3. GET 往返：刚开始没有状态文件

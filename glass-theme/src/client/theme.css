@@ -579,7 +579,7 @@ html[data-glass] body [role=dialog] [class*=yHUiNq_action] > button:disabled{
 }
 
 
-/* 思考档位浮层（.dsh-reasoning-model__popover）也用 role=dialog，会被上面 dialog 磨砂误伤。
+/* 其他插件的浮层（.dsh-reasoning-model__popover）也用 role=dialog，会被上面 dialog 磨砂误伤。
    对齐 / 面板与模型菜单实底（T4），去掉透明底与 blur。 */
 html[data-glass] body .dsh-reasoning-model__popover[role=dialog],
 html[data-glass] body .dsh-reasoning-model__popover{
@@ -969,7 +969,7 @@ html[data-glass] [data-gx-overlay-sb][data-dragging]{cursor:grabbing}
 html[data-glass] [data-gx-overlay-sb]:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:1px}
 @media(prefers-reduced-motion:reduce){html[data-glass] [data-gx-overlay-sb]{transition:none}}
 
-/* 官方设置 · 账号与余额：沿用现有两组容器，只统一成消息提示页的浅底卡。
+/* 官方设置 · 账号与余额：沿用现有两组容器，只统一成其他插件的设置页的浅底卡。
    精确限定设置弹窗与直属卡片；不影响充值主按钮、登录弹窗或平台付款页。
    官方类名变更时本规则自然失效，保留官方界面。 */
 html[data-glass] [data-shortcut-modal="settings"] section._6qcDqa_section

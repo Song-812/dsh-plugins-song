@@ -5,10 +5,6 @@ English | [简体中文](README.md)
 A small DSH alert plugin: one sound each for needs-answer, output-complete, error, and stalled.
 Pure client-side — lives under DSH Settings, watches session state, and plays a tone when something happens. No external dependencies and no build step.
 
-Settings screenshot:
-
-![Settings](preview/settings.png)
-
 - Author: Song-812
 - Version: 0.1.0
 - License: MIT
@@ -54,7 +50,6 @@ Approval waits do not ring on their own, but they block false “complete” and
 | `lib/index.js` | Host half: empty shell so the bundle can resolve `main` by package name |
 | `lib/client.js` | Client half: detection, audio, and the settings page — handwritten, no build |
 | `locale/` | Locale overlay anchors |
-| `preview/settings.png` | Settings screenshot |
 | `cordis.patch.yml` | Plugin row declaration |
 | `test/*.test.mjs` | Offline tests for the engine, menus, and service-shape probes |
 
