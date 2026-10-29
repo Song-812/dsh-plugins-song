@@ -4,7 +4,7 @@ English | [简体中文](README.md)
 
 A collection of DSH plugins by Song. Updated continuously.
 
-> **Platforms**: `session-delete` needs the Windows Recycle Bin (`powershell.exe` + `shell32`) — do not install it elsewhere. `msg-notify` is a pure client alert; `skills-toggle` / `mcp-toggle` / `plugins-panel` only write their own `~/.dsh/*.json` display prefs (plus skills front matter); `global-rules` edits `$DSH_HOME/AGENTS.md` (default `~/.dsh/AGENTS.md`) — none of them need the Recycle Bin.
+> **Platforms**: `session-delete` needs the Windows Recycle Bin (`powershell.exe` + `shell32`) — do not install it elsewhere. `msg-notify` is a pure client alert; `skills-toggle` / `mcp-toggle` / `plugins-panel` only write their own `~/.dsh/*.json` display prefs (plus skills front matter); `global-rules` edits `$DSH_HOME/AGENTS.md` (default `~/.dsh/AGENTS.md`); `proxy-connect` splits web fetch and model egress by a host list (local proxy port by default, Node ≥ 22.19) — none of them need the Recycle Bin.
 
 ## Why
 
@@ -24,7 +24,7 @@ DSH desktop does not ship every small capability you want day to day. This repo 
 | Plugins Sidebar (插件侧栏) | [`plugins-panel/`](./plugins-panel/) · `dsh-plugins-panel` | ✅ Available | Sidebar toggles for self-made plugins; group collapse, bulk knob, drag reorder, search, plus jump to official manager |
 | MCP Sidebar (MCP侧栏) | [`mcp-toggle/`](./mcp-toggle/) · `dsh-mcp-toggle` | ✅ Available | Sidebar MCP enable/disable; group collapse, bulk knob, drag reorder, search |
 | UI Hide (UI隐藏) | — | 🚧 Coming soon | |
-| Proxy Connect (代理连接) | — | 🚧 Coming soon | |
+| Proxy Connect (代理连接) | [`proxy-connect/`](./proxy-connect/) · `dsh-proxy-connect` | ✅ Available | One toggle + one host list: split web fetch and model egress (listed hosts via proxy) |
 | Web Connect (网页连接) | — | 🚧 Coming soon | |
 | MCP-OAuth Bridge (MCP-OAuth桥接) | — | 🚧 Coming soon | |
 
@@ -37,8 +37,9 @@ DSH desktop does not ship every small capability you want day to day. This repo 
 
 | Need | Notes |
 |---|---|
-| Windows (`session-delete` only) | Recycle Bin bridge needs `powershell.exe` and `shell32.dll`. `msg-notify` is a pure client alert; `skills-toggle` / `mcp-toggle` / `plugins-panel` only write their own `~/.dsh/*.json` display prefs (plus skills front matter); `global-rules` edits `$DSH_HOME/AGENTS.md` (default `~/.dsh/AGENTS.md`) — none of them need the Recycle Bin |
+| Windows (`session-delete` only) | Recycle Bin bridge needs `powershell.exe` and `shell32.dll`. `msg-notify` is a pure client alert; `skills-toggle` / `mcp-toggle` / `plugins-panel` only write their own `~/.dsh/*.json` display prefs (plus skills front matter); `global-rules` edits `$DSH_HOME/AGENTS.md` (default `~/.dsh/AGENTS.md`); `proxy-connect` splits web fetch and model egress by a host list (local proxy port by default, Node ≥ 22.19) — none of them need the Recycle Bin |
 | Node.js ≥ 18 | Required to run tests; installing the plugin itself goes through DSH |
+| Node.js ≥ 22.19 (`proxy-connect` only) | Required by undici 8; DSH ships Node 24 |
 
 ## Layout
 
@@ -48,6 +49,7 @@ DSH desktop does not ship every small capability you want day to day. This repo 
     mcp-toggle/       MCP Sidebar plugin (published)
     plugins-panel/    Plugins Sidebar plugin (published)
     global-rules/     Global Rules plugin (published)
+    proxy-connect/    Proxy Connect plugin (published)
     LICENSE           MIT
     README.md         Chinese
     README.en.md      English
@@ -58,7 +60,7 @@ Each published plugin has `node --test ./test/*.test.js`. Recycle Bin cases crea
 
 ## Known limitations
 
-- `session-delete` is **Windows only** (it needs the Recycle Bin). `msg-notify` is a pure client alert; `skills-toggle` / `mcp-toggle` / `plugins-panel` only write their own `~/.dsh/*.json` display prefs (plus skills front matter); `global-rules` edits `$DSH_HOME/AGENTS.md` (default `~/.dsh/AGENTS.md`) — none of them need the Recycle Bin
+- `session-delete` is **Windows only** (it needs the Recycle Bin). `msg-notify` is a pure client alert; `skills-toggle` / `mcp-toggle` / `plugins-panel` only write their own `~/.dsh/*.json` display prefs (plus skills front matter); `global-rules` edits `$DSH_HOME/AGENTS.md` (default `~/.dsh/AGENTS.md`); `proxy-connect` splits web fetch and model egress by a host list (local proxy port by default, Node ≥ 22.19) — none of them need the Recycle Bin
 - “Coming soon” rows are placeholders; directories and package names will be filled in later
 
 ## License
