@@ -393,7 +393,7 @@ async function inspectSession(ctx, sessionId) {
  * 删掉一个会话：先把文件送进**系统回收站**，成功后再摘账目、广播移除。
  *
  * 顺序很关键：先删文件。删文件失败就原样退出——工作区账目没动、那一行还在，
- * 主人可以重试。反过来先摘账目的话，送回收站一旦失败（文件被占用），侧栏那一行会消失，
+ * 用户可以重试。反过来先摘账目的话，送回收站一旦失败（文件被占用），侧栏那一行会消失，
  * 磁盘上却留着目录，看起来"删了"其实变成孤儿。
  *
  * 文件删掉之后，摘账目/广播失败都只记日志、不再报错：否则接口报失败、行还留着，
@@ -445,8 +445,16 @@ async function deleteSession(ctx, sessionId, deps = {}) {
       error.code = 'move-failed'
       throw error
     }
-    if (deleted.length === 0 && bridge.ok !== true) {
-      const error = new Error(`会话没能送进回收站（多半被内核占用）: ${String(bridge.error || '回收站写入失败')}`)
+    // 桥失败或未确认会话目录已经移走时，不能只因缓存已处理就报告成功。
+    const deletedSet = new Set(deleted.map((path) => path.toLowerCase()))
+    const unconfirmed = dirs.filter((path) => !deletedSet.has(path.toLowerCase()))
+    const cachePaths = new Set(candidates.filter((path) => !dirs.some((dir) => dir.toLowerCase() === path.toLowerCase())).map((path) => path.toLowerCase()))
+    const onlyCacheFailed = bridge.ok === false && unconfirmed.length === 0 && failed.length > 0
+      && typeof bridge.error === 'string' && /^partial(?:\s|:|\()/i.test(bridge.error)
+      && typeof bridge.permanent === 'boolean'
+      && failed.every((item) => typeof item.path === 'string' && cachePaths.has(item.path.toLowerCase()) && item.error === 'still on disk')
+    if (unconfirmed.length > 0 || (bridge.ok !== true && !onlyCacheFailed)) {
+      const error = new Error('会话未能完整送入回收站，请检查会话列表和回收站后再重试。')
       error.code = 'move-failed'
       throw error
     }

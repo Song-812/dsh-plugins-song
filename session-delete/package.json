@@ -1,6 +1,6 @@
 {
   "name": "dsh-session-delete",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "会话列表每行悬停出一个垃圾桶，确认后把会话目录送进 Windows 回收站。",
   "author": "Song-812",
@@ -45,6 +45,6 @@
     }
   },
   "scripts": {
-    "test": "node --test ./test/*.test.js"
+    "test": "node --test"
   }
 }

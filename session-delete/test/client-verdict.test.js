@@ -17,6 +17,7 @@ function loadClient() {
     react: {
       createElement: () => null,
       useState: (initial) => [initial, () => {}],
+      useRef: (initial) => ({current: initial}),
       useEffect: () => {},
       useSyncExternalStore: () => null,
     },
@@ -196,6 +197,7 @@ test('apply 注册两个插槽，且垃圾桶能真的渲染出来（不会一�
   const react = {
     createElement: (type, props, ...children) => ({ type, props: { ...(props || {}), children } }),
     useState: (initial) => [typeof initial === 'function' ? initial() : initial, () => {}],
+    useRef: (initial) => ({current: initial}),
     // 副作用不真跑：这里只验渲染不炸，不验订阅行为。
     useEffect: () => {},
     useSyncExternalStore: () => null,
