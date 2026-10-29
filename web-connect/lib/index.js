@@ -63,7 +63,7 @@ export function apply(ctx) {
       (args,exec)=>connector.openUser({path:args.path,signal:exec.signal,open:openDefaultBrowser}));
     disposers.push(ctx.systemPrompt.section({
       name:'dsh-web-connect',order:ctx.systemPrompt.getSectionOrder('MCP_SERVERS'),interpolate:false,
-      text:()=> 'DSH 自身页面验证使用 dsh_web_verify，用户要求打开网页版使用 dsh_web_open。插件可用时，上述入口替代任何旧全局规则中 open_dsh_web.cmd / dsh_web_auth.py 的建议；不要同时运行旧脚本。验证工具成功只表示页面已登录，还要截图或检查实际修改再报告。不要提取或展示认证信息。',
+      text:()=> 'DSH 自身页面验证使用 dsh_web_verify，用户要求打开网页版使用 dsh_web_open。插件可用时，上述入口替代任何旧全局规则中旧的本地启动脚本的建议；不要同时运行旧脚本。验证工具成功只表示页面已登录，还要截图或检查实际修改再报告。不要提取或展示认证信息。',
     }));
   } catch (error) {
     for (const dispose of disposers.reverse()) dispose();

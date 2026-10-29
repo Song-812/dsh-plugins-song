@@ -61,7 +61,7 @@ DSH desktop does not ship every small capability you want day to day. This repo 
 
 ## Tests
 
-Each published plugin has `node --test ./test/*.test.js`. Recycle Bin cases create, delete and restore **temp** folders only — they never touch real DSH sessions.
+Each plugin's tests run with `npm test` inside that plugin folder (every plugin's `package.json` has a `test` script). Recycle Bin cases create, delete and restore **temp** folders only — they never touch real DSH sessions.
 
 ## Known limitations
 

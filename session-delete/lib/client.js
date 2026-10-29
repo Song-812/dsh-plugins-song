@@ -88,7 +88,7 @@ window.__ModuleLoader__.load({
     const API_DELETE = '/dsh-session-delete/delete'
     const ROW_ACTION_SLOT = 'sidebar.workspaces.session.row.action'
     const ROW_ACTION_ID = 'session-delete'
-    /** 排在 archive(100) / pin(200) 与 ui-hide 的重命名(50) 后面。 */
+    /** 排在 archive(100) / pin(200) 与其他插件的重命名(50) 后面。 */
     const ROW_ACTION_ORDER = 300
     const OVERLAY_SLOT = 'shell.overlay'
     const OVERLAY_ID = 'session-delete-confirm'

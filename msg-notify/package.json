@@ -28,7 +28,6 @@
     "lib",
     "locale",
     "cordis.patch.yml",
-    "preview",
     "README.md",
     "README.en.md"
   ],

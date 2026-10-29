@@ -224,9 +224,9 @@ const byClass = (node, name) => {
 // 插件的行（插件形状：entryId / moduleName / meta.title / patchId / readOnlyReason）
 const ROWS = [
   {
-    id: 'p-a', entryId: 'entry-a', moduleName: 'dsh-mcp-toggle', path: 'patch-a',
+    id: 'p-a', entryId: 'entry-a', moduleName: 'dsh-example-plugin', path: 'patch-a',
     icon: 'https://example.test/icon.png',
-    name: 'MCP 开关', official: 'MCP 开关', description: '侧栏 MCP 页', version: '0.2.0',
+    name: '示例插件', official: '示例插件', description: '侧栏 MCP 页', version: '0.2.0',
     enabled: true, fiberPhase: 'active', group: 'self',
   },
   {
@@ -277,8 +277,8 @@ function render(overrides = {}) {
 /** 官方 remote 返回的行（真形状）：refresh 负责把它们合成页面用的行。 */
 const OFFICIAL_ROWS = [
   {
-    entryId: 'entry-a', moduleName: 'dsh-mcp-toggle', patchId: 'patch-a',
-    meta: { title: 'MCP 开关', description: '侧栏 MCP 页' }, enabled: true, fiberPhase: 'active',
+    entryId: 'entry-a', moduleName: 'dsh-example-plugin', patchId: 'patch-a',
+    meta: { title: '示例插件', description: '侧栏 MCP 页' }, enabled: true, fiberPhase: 'active',
   },
   {
     entryId: 'entry-b', moduleName: 'dsh-zh-intro', patchId: 'patch-b',
@@ -321,7 +321,7 @@ check('未折叠时自制组有一个列表', collect(tree, (node) => byClass(no
 check('行里显示官方简介', texts(tree, 'plp-desc').includes('侧栏 MCP 页'), JSON.stringify(texts(tree, 'plp-desc')))
 check('没有简介的行显示占位文案', texts(tree, 'plp-desc').includes('（没有简介）'), JSON.stringify(texts(tree, 'plp-desc')))
 check('每行仍有包名副标题',
-  JSON.stringify(texts(tree, 'plp-sub')) === JSON.stringify(['dsh-mcp-toggle', 'dsh-zh-intro', '@deepseek-ai/dsh-base']),
+  JSON.stringify(texts(tree, 'plp-sub')) === JSON.stringify(['dsh-example-plugin', 'dsh-zh-intro', '@deepseek-ai/dsh-base']),
   JSON.stringify(texts(tree, 'plp-sub')))
 check('说明文字与官方那句一致', texts(tree, 'plp-intro')[0] === '安装、启用和配置插件', JSON.stringify(texts(tree, 'plp-intro')))
 check('工具区同一行保留官方管理页、恢复默认与刷新',
@@ -361,7 +361,7 @@ check('refresh 按 patchId 判可切换（基础包被锁住）',
   Array.isArray(serversSet) && serversSet.some((row) => row.moduleName === '@deepseek-ai/dsh-base' && row.readOnly === 'management-required'),
   JSON.stringify(serversSet?.map((row) => [row.moduleName, row.readOnly])))
 check('refresh 认得 meta.title（含 { zh } 记录）',
-  Array.isArray(serversSet) && serversSet.some((row) => row.name === 'MCP 开关') && serversSet.some((row) => row.name === '插件中文简介'),
+  Array.isArray(serversSet) && serversSet.some((row) => row.name === '示例插件') && serversSet.some((row) => row.name === '插件中文简介'),
   JSON.stringify(serversSet?.map((row) => row.name)))
 check('refresh 用宿主报的 selfMade 判「自制」',
   Array.isArray(serversSet) && serversSet.some((row) => row.moduleName === 'dsh-zh-intro' && row.group === 'self'),
@@ -397,7 +397,7 @@ check('锁住的行给出原因', texts(tree, 'plp-reason').some((text) => Strin
 
 // 改过名时：副标题必须是「原本的名字」，而不是包名（用户要求，与另两页同一套做法）。
 const officialCustom = render({ prefs: { titles: { 'p-a': '我的开关' }, desc: {}, groupTitles: {}, order: {}, collapsed: {}, bulk: {} } })
-check('改过名后副标题给的是官方原名（不是包名）', texts(officialCustom, 'plp-sub')[0] === 'MCP 开关' && !texts(officialCustom, 'plp-sub').includes('dsh-mcp-toggle'), JSON.stringify(texts(officialCustom, 'plp-sub')))
+check('改过名后副标题给的是官方原名（不是包名）', texts(officialCustom, 'plp-sub')[0] === '示例插件' && !texts(officialCustom, 'plp-sub').includes('dsh-example-plugin'), JSON.stringify(texts(officialCustom, 'plp-sub')))
 const scopedCustom = render({ servers: [{ id: 'p-z', entryId: 'entry-z', moduleName: '@machine-126/dsh-alert-sound', path: 'patch-z', name: 'dsh-alert-sound', official: 'dsh-alert-sound', description: '', version: '', enabled: true, fiberPhase: 'active', group: 'self' }], prefs: { titles: { 'p-z': '提示音' }, desc: {}, groupTitles: {}, order: {}, collapsed: {}, bulk: {} } })
 check('改过名 + 官方给了名字：主标题自定义名、副标题原名', texts(scopedCustom, 'plp-name').includes('提示音') && JSON.stringify(texts(scopedCustom, 'plp-sub')) === JSON.stringify(['dsh-alert-sound']), JSON.stringify([texts(scopedCustom, 'plp-name'), texts(scopedCustom, 'plp-sub')]))
 const scopedNoOfficial = render({ servers: [{ id: 'p-y2', entryId: 'entry-y2', moduleName: '@machine-126/dsh-other', path: 'patch-y2', name: '@machine-126/dsh-other', description: '', version: '', enabled: true, fiberPhase: 'active', group: 'self' }], prefs: { titles: { 'p-y2': '我爱叫它啥' }, desc: {}, groupTitles: {}, order: {}, collapsed: {}, bulk: {} } })
@@ -452,7 +452,7 @@ check('旋钮方向立刻落盘（按组）', bulkPost !== undefined && JSON.par
 // ---------------------------------------------------------------- E 改名
 
 const renamedTree = render({ prefs: { titles: { 'p-a': '我的开关' }, desc: {}, groupTitles: {}, order: {}, collapsed: {}, bulk: {} } })
-check('改过名的显示自定义名，官方原名退到副标题', texts(renamedTree, 'plp-name')[0] === '我的开关' && texts(renamedTree, 'plp-sub')[0] === 'MCP 开关', JSON.stringify([texts(renamedTree, 'plp-name'), texts(renamedTree, 'plp-sub')]))
+check('改过名的显示自定义名，官方原名退到副标题', texts(renamedTree, 'plp-name')[0] === '我的开关' && texts(renamedTree, 'plp-sub')[0] === '示例插件', JSON.stringify([texts(renamedTree, 'plp-name'), texts(renamedTree, 'plp-sub')]))
 
 // ---------------------------------------------------------------- F 改简介
 
@@ -463,7 +463,7 @@ check('自写简介覆盖官方那句', texts(ownDescTree, 'plp-desc').includes(
 
 const searchTree = (query) => render({ query })
 check('按显示名搜到', cards(searchTree('插件中文简介')).length === 1)
-check('按包名搜到', cards(searchTree('dsh-mcp-toggle')).length === 1)
+check('按包名搜到', cards(searchTree('dsh-example-plugin')).length === 1)
 check('按官方简介搜到', cards(searchTree('侧栏 MCP 页')).length === 1)
 check('按版本行搜到', cards(searchTree('v0.2.0')).length === 1, JSON.stringify(cards(searchTree('v0.2.0')).length))
 const namedSearch = render({ query: '我的开关', prefs: { titles: { 'p-a': '我的开关' }, desc: {}, groupTitles: {}, order: {}, collapsed: {}, bulk: {} } })

@@ -775,7 +775,7 @@ for (const status of [404, 405]) {
     source.includes('installSkillMenuHider()') && source.includes('skill-menu-hider'),
     'missing wiring')
 
-  // 2026-10-25: 侧栏「自动化任务」入口的隐藏已移交 dsh-ui-hide 插件 —— 本插件
+  // 2026-10-25: 侧栏「自动化任务」入口的隐藏已移交其他插件 —— 本插件
   // 只保留 / 菜单里的技能行隐藏，不再越界改侧栏。这里守住「不回头」。
   check('侧栏入口隐藏已移交（本插件不再处理）',
     !source.includes('SIDEBAR_HIDDEN_LABELS')
