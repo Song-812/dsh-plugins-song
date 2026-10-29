@@ -23,7 +23,7 @@ DSH desktop does not ship every small capability you want day to day. This repo 
 | Skills Sidebar (技能侧栏) | [`skills-toggle/`](./skills-toggle/) · `dsh-skills-toggle` | ✅ Available | Sidebar toggles for model / manual invocation; group collapse, bulk knob, drag reorder, search |
 | Plugins Sidebar (插件侧栏) | [`plugins-panel/`](./plugins-panel/) · `dsh-plugins-panel` | ✅ Available | Sidebar toggles for self-made plugins; group collapse, bulk knob, drag reorder, search, plus jump to official manager |
 | MCP Sidebar (MCP侧栏) | [`mcp-toggle/`](./mcp-toggle/) · `dsh-mcp-toggle` | ✅ Available | Sidebar MCP enable/disable; group collapse, bulk knob, drag reorder, search |
-| UI Hide (UI隐藏) | — | 🚧 Coming soon | |
+| UI Hide (UI隐藏) | [`ui-hide/`](./ui-hide/) · `dsh-ui-hide` | ✅ Available | Hide unwanted UI entry points from a list; rename sessions right from the row |
 | Proxy Connect (代理连接) | [`proxy-connect/`](./proxy-connect/) · `dsh-proxy-connect` | ✅ Available | One toggle + one host list: split web fetch and model egress (listed hosts via proxy) |
 | Web Connect (网页连接) | [`web-connect/`](./web-connect/) · `dsh-web-connect` | ✅ Available | Self-UI verify via chrome-devtools, or open the signed-in web UI in the default browser on request |
 | MCP-OAuth Bridge (MCP-OAuth桥接) | — | 🚧 Coming soon | |
@@ -51,6 +51,7 @@ DSH desktop does not ship every small capability you want day to day. This repo 
     global-rules/     Global Rules plugin (published)
     proxy-connect/    Proxy Connect plugin (published)
     web-connect/      Web Connect plugin (published)
+    ui-hide/          UI Hide plugin (published)
     LICENSE           MIT
     README.md         Chinese
     README.en.md      English
