@@ -23,7 +23,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
 | 技能侧栏 (Skills Sidebar) | [`skills-toggle/`](./skills-toggle/) · `dsh-skills-toggle` | ✅ 已发布 | 侧栏管理技能的「模型 / 手动」开关；分组折叠、一键开关、拖动排序与搜索 |
 | 插件侧栏 (Plugins Sidebar) | [`plugins-panel/`](./plugins-panel/) · `dsh-plugins-panel` | ✅ 已发布 | 侧栏管理自制插件开关；分组折叠、一键开关、拖动排序、搜索，并可跳转官方管理页 |
 | MCP 侧栏 (MCP Sidebar) | [`mcp-toggle/`](./mcp-toggle/) · `dsh-mcp-toggle` | ✅ 已发布 | 侧栏管理 MCP 服务器开关；分组折叠、一键开关、拖动排序与搜索 |
-| UI 隐藏 (UI Hide) | — | 🚧 即将开源 | |
+| UI 隐藏 (UI Hide) | [`ui-hide/`](./ui-hide/) · `dsh-ui-hide` | ✅ 已发布 | 按清单隐藏不需要的界面入口；会话行上直接「重命名」 |
 | 代理连接 (Proxy Connect) | [`proxy-connect/`](./proxy-connect/) · `dsh-proxy-connect` | ✅ 已发布 | 一个开关 + 一份名单：抓网页与模型出网分流（名单内走代理） |
 | 网页连接 (Web Connect) | [`web-connect/`](./web-connect/) · `dsh-web-connect` | ✅ 已发布 | 验证自身界面（chrome-devtools）与按用户要求在默认浏览器打开已登录网页版 |
 | MCP-OAuth 桥接 (MCP-OAuth Bridge) | — | 🚧 即将开源 | |
@@ -53,6 +53,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
     global-rules/     全局规则插件（已发布）
     proxy-connect/    代理连接插件（已发布）
     web-connect/      网页连接插件（已发布）
+    ui-hide/          UI 隐藏插件（已发布）
     LICENSE           MIT
     README.md         中文说明
     README.en.md      English

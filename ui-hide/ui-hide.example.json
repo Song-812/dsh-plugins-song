@@ -1,0 +1,45 @@
+{
+  "enabled": true,
+  "targets": [
+    {
+      "id": "more-sidebar",
+      "selector": "nav[aria-label=\"全局面板\"] button[aria-haspopup=\"menu\"]",
+      "note": "左侧栏底部「更多」"
+    },
+    {
+      "id": "more-views",
+      "selector": "button[class*=\"viewsMore\"]",
+      "note": "会话顶部标题栏「更多会话视图」"
+    },
+    {
+      "id": "more-guide",
+      "selector": "[class*=\"moreAnchor\"] button[aria-haspopup=\"menu\"]",
+      "note": "右侧栏「开始」标签页「更多」"
+    },
+    {
+      "id": "automation-entry",
+      "selector": "nav[aria-label=\"全局面板\"] button[aria-label=\"自动化任务\"]",
+      "note": "左侧栏「自动化任务」入口"
+    },
+    {
+      "id": "session-row-archive",
+      "selector": "[data-row-key^=\"session:\"] button[aria-label=\"归档会话\"]",
+      "note": "会话行 hover 出现的「归档」图标（菜单里的归档仍在）"
+    },
+    {
+      "id": "session-row-pin",
+      "selector": "[data-row-key^=\"session:\"] button[aria-label=\"置顶会话\"], [data-row-key^=\"session:\"] button[aria-label=\"取消置顶\"]",
+      "note": "会话行 hover 出现的「置顶 / 取消置顶」图标（菜单里的置顶仍在）"
+    },
+    {
+      "id": "menu-rename",
+      "selector": "[role=\"menu\"] button[aria-keyshortcuts=\"Control+Alt+G\"]",
+      "note": "会话「…」菜单里的「重命名」，已搬到会话行上（行上按钮点的就是这一项）"
+    },
+    {
+      "id": "settings-open-config",
+      "selector": "[data-shortcut-modal=\"settings\"] [class*=\"yHUiNq_action\"]",
+      "note": "所有设置页顶栏「打开配置文件」入口（依赖当前宿主版本的专属类名，宿主改版后需更新）；关闭按钮保留"
+    }
+  ]
+}
