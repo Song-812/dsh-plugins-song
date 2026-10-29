@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Message Alerts",
+    "description": "One sound per event: needs answer, output complete, error, stalled. Pick a tone and repeat per kind."
+  }
+}

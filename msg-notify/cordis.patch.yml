@@ -1,0 +1,6 @@
+# 消息提示（dsh-msg-notify）bundle 补丁：
+# 浏览器端的检测、发声、设置页都在 lib/client.js 里；这里只登记一个 host 行，
+# 让 loader 能按包名解析到这个包（Node 侧需要一个可解析的 main）。
+- insert:
+    - id: dsh-msg-notify
+      name: dsh-msg-notify

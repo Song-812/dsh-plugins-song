@@ -1,0 +1,53 @@
+{
+  "name": "dsh-msg-notify",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "DSH 消息提示：需要回答 / 输出完成 / 发生错误 / 卡住 四类提醒，每类可选音色与重复，音量跟随系统。",
+  "author": "Song-812",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Song-812/dsh-plugins-song.git",
+    "directory": "msg-notify"
+  },
+  "homepage": "https://github.com/Song-812/dsh-plugins-song/tree/main/msg-notify",
+  "bugs": {
+    "url": "https://github.com/Song-812/dsh-plugins-song/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "lib",
+    "locale",
+    "cordis.patch.yml",
+    "preview",
+    "README.md",
+    "README.en.md"
+  ],
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-renderer"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}

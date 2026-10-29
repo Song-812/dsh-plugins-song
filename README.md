@@ -4,7 +4,7 @@
 
 Song 自制的 DSH 插件合集，持续更新。
 
-> **仅 Windows**：当前插件依赖 Windows 回收站（`powershell.exe` + `shell32`）。其它平台请勿安装。
+> **平台说明**：`session-delete` 依赖 Windows 回收站（`powershell.exe` + `shell32`），其它平台请勿装它。`msg-notify` 是纯客户端提醒，不依赖回收站。
 
 ## 它解决什么问题
 
@@ -15,7 +15,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
 | 插件 | 目录 / 包名 | 状态 | 作用 |
 |---|---|---|---|
 | 会话删除 (Session Delete) | [`session-delete/`](./session-delete/) · `dsh-session-delete` | ✅ 已发布 | 会话行悬停垃圾桶：确认后把会话目录送进 **Windows 系统回收站** |
-| 消息提示 (Message Notice) | — | 🚧 即将开源 | |
+| 消息提示 (Message Notice) | [`msg-notify/`](./msg-notify/) · `dsh-msg-notify` | ✅ 已发布 | 需要回答 / 输出完成 / 发生错误 / 卡住：四类场景各配提示音（音色与重复可调） |
 | 启动动画 (Boot Animation) | — | 🚧 即将开源 | |
 | 玻璃主题 (Glass Theme) | — | 🚧 即将开源 | |
 | 全局规则 (Global Rules) | — | 🚧 即将开源 | |
@@ -39,12 +39,13 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
 
 | 需要 | 说明 |
 |---|---|
-| Windows | 回收站桥依赖 `powershell.exe` 与 `shell32.dll` |
+| Windows（仅 `session-delete`） | 回收站桥依赖 `powershell.exe` 与 `shell32.dll`。`msg-notify` 是纯客户端，不依赖回收站 |
 | Node.js ≥ 18 | 跑插件测试时需要；装插件本身走 DSH |
 
 ## 项目结构
 
     session-delete/   会话删除插件（已发布）
+    msg-notify/       消息提示插件（已发布）
     LICENSE           MIT
     README.md         中文说明
     README.en.md      English
@@ -55,7 +56,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
 
 ## 已知限制
 
-- 当前已发布插件**只在 Windows 上能用**
+- `session-delete` **只在 Windows 上能用**（依赖系统回收站）。`msg-notify` 是纯客户端提醒，不依赖回收站
 - 「即将开源」的条目还在整理，目录与包名以后补上
 
 ## 许可证
