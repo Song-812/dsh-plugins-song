@@ -1,0 +1,73 @@
+{
+  "name": "dsh-launch-animation",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "DSH 启动动画：开机时用自定义图跑一段线稿描边动画，盖住默认 Loading 卡片，等界面就绪再揭幕；可换身份图，播放时可随时跳过。配置在 $DSH_HOME/launch-animation/settings.json（默认 ~/.dsh/launch-animation/settings.json）。",
+  "author": "Song-812",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Song-812/dsh-plugins-song.git",
+    "directory": "launch-animation"
+  },
+  "homepage": "https://github.com/Song-812/dsh-plugins-song/tree/main/launch-animation",
+  "bugs": {
+    "url": "https://github.com/Song-812/dsh-plugins-song/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "plugin",
+    "splash",
+    "boot-animation",
+    "launch-animation"
+  ],
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "assets",
+    "cordis.patch.yml",
+    "settings.example.json",
+    "README.md",
+    "README.en.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-settings-general"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "check": "node --check lib/index.js && node --check lib/client.js && node --check lib/settings.js && node --check lib/artwork.js",
+    "selfcheck": "node check.mjs"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
