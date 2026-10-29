@@ -17,7 +17,7 @@ DSH desktop does not ship every small capability you want day to day. This repo 
 | Session Delete (会话删除) | [`session-delete/`](./session-delete/) · `dsh-session-delete` | ✅ Available | Hover trash on each session row; confirming sends the session folder to the **Windows Recycle Bin** |
 | Message Notice (消息提示) | [`msg-notify/`](./msg-notify/) · `dsh-msg-notify` | ✅ Available | Four tones: needs-answer / complete / error / stalled (tone + repeat per kind) |
 | Boot Animation (启动动画) | [`launch-animation/`](./launch-animation/) · `dsh-launch-animation` | ✅ Available | Boot line-drawing splash over default Loading; custom identity; skip anytime |
-| Glass Theme (玻璃主题) | — | 🚧 Coming soon | |
+| Glass Theme (玻璃主题) | [`glass-theme/`](./glass-theme/) · `dsh-glass-theme` | ✅ Available | Wallpaper + frosted-glass UI; accent, hover lift, cursor glow |
 | Global Rules (全局规则) | [`global-rules/`](./global-rules/) · `dsh-global-rules` | ✅ Available | Settings-page editor for AGENTS.md; save / restore defaults (backs up before clearing) |
 | Thinking Levels (思考档位) | [`reasoning-effort/`](./reasoning-effort/) · `dsh-reasoning-effort` | ✅ Available | Composer model seat: reasoning-effort slider + turbo lightning |
 | Skills Sidebar (技能侧栏) | [`skills-toggle/`](./skills-toggle/) · `dsh-skills-toggle` | ✅ Available | Sidebar toggles for model / manual invocation; group collapse, bulk knob, drag reorder, search |
@@ -54,6 +54,7 @@ DSH desktop does not ship every small capability you want day to day. This repo 
     ui-hide/          UI Hide plugin (published)
     reasoning-effort/ Thinking Levels plugin (published)
     launch-animation/ Boot Animation plugin (published)
+    glass-theme/      Glass Theme plugin (published)
     LICENSE           MIT
     README.md         Chinese
     README.en.md      English

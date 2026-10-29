@@ -1,0 +1,161 @@
+/* 玻璃主题 · 设置页
+ * 结构：页头（玻璃主题 + 恢复默认）/ 三张分组卡（主题、背景、特效）。
+ * 颜色全部走宿主 token，明暗两套主题都成立。
+ */
+
+.gx-page{
+  display:flex;flex-direction:column;gap:8px;
+  padding:12px 0 14px;max-width:600px;
+  color:var(--dsw-alias-label-primary);
+  font-family:var(--dsw-font-family);
+}
+
+/* ---------- 页头 ---------- */
+.gx-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px;margin:0 0 4px;padding:0}
+/* 四档字阶：总标题 > 区块标题 > 选项标题 > 说明文 */
+.gx-title{
+  font-family:var(--dsw-font-family);
+  font-size:17px;font-weight:700;line-height:24px;margin:0;
+  letter-spacing:.06em;
+}
+/* ---------- 分组卡 ---------- */
+.gx-card{
+  border-radius:12px;padding:2px 18px 4px;
+  background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 34%,transparent);
+  box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 10%,transparent);
+}
+.gx-card-title{
+  font-family:var(--dsw-font-family);
+  font-size:15px;font-weight:650;line-height:22px;margin:0 0 18px;padding-top:10px;
+  letter-spacing:.05em;
+  color:var(--dsw-alias-label-primary);
+}
+
+/* ---------- 行 ---------- */
+.gx-row{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding:8px 0;border-bottom:1px solid color-mix(in srgb,var(--dsw-alias-label-primary) 10%,transparent);
+}
+.gx-card .gx-row:last-child{border-bottom:0}
+.gx-row-text{min-width:0}
+/* 选项/说明改用系统 UI 栈，比主题字更素 */
+.gx-row-title{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  font-size:13.5px;font-weight:500;line-height:20px;letter-spacing:0;
+}
+.gx-row-desc{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  font-size:12px;font-weight:400;line-height:18px;margin-top:3px;max-width:300px;
+  letter-spacing:0;
+  color:color-mix(in srgb,var(--dsw-alias-label-secondary) 68%,transparent);
+}
+.gx-control{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+
+/* ---------- 开关 ---------- */
+.gx-switch{
+  width:36px;height:20px;border-radius:999px;corner-shape:round;border:0;padding:0;cursor:pointer;position:relative;
+  background:color-mix(in srgb,var(--dsw-alias-label-primary) 22%,transparent);
+  transition:background .18s;flex:0 0 auto;
+}
+.gx-switch::after{
+  content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;corner-shape:round;
+  background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:left .18s;
+}
+.gx-switch[aria-checked=true]{background:var(--glass-accent)}
+.gx-switch[aria-checked=true]::after{left:18px}
+.gx-switch:focus-visible{outline:2px solid color-mix(in srgb,var(--glass-accent) 80%,transparent);outline-offset:2px}
+
+/* ---------- 滑杆 + 数字框 ---------- */
+.gx-range{
+  width:186px;height:20px;appearance:none;-webkit-appearance:none;background:transparent;margin:0;
+  flex:0 1 186px;min-width:36px;
+  --gx-fill:50%;
+}
+.gx-range::-webkit-slider-runnable-track{
+  height:4px;border-radius:999px;
+  background:linear-gradient(to right,var(--glass-accent) 0 var(--gx-fill),color-mix(in srgb,var(--dsw-alias-label-primary) 15%,transparent) var(--gx-fill) 100%);
+}
+.gx-range::-webkit-slider-thumb{
+  -webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;margin-top:-5px;
+  box-shadow:0 0 0 .5px rgba(19,45,83,.30),0 1px 2px rgba(0,0,0,.18);cursor:pointer;
+}
+.gx-control:has(.gx-range){flex:0 1 auto;min-width:0;max-width:100%}
+.gx-num{display:flex;align-items:center;gap:6px;flex:none}
+.gx-stepper{position:relative;width:52px;height:32px;flex:none}
+.gx-stepper input{
+  box-sizing:border-box;width:52px;height:32px;border:0;border-radius:var(--dsw-radius-md,8px);padding:0;text-align:center;
+  background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);
+  box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 14%,transparent),0 1px 2px rgba(19,45,83,.06);
+  font:inherit;font-size:13.5px;color:var(--dsw-alias-label-primary);
+  font-variant-numeric:tabular-nums;appearance:textfield;-moz-appearance:textfield;
+}
+.gx-stepper:hover input,.gx-stepper:focus-within input{background:var(--dsw-alias-bg-module-platform)}
+.gx-stepper input::-webkit-inner-spin-button,.gx-stepper input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.gx-stepper input:focus-visible,.gx-stepper-arrows button:focus-visible{outline:2px solid var(--glass-accent);outline-offset:1px}
+.gx-stepper-arrows{position:absolute;right:2px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;opacity:0;pointer-events:none}
+.gx-stepper:hover .gx-stepper-arrows,.gx-stepper:focus-within .gx-stepper-arrows{opacity:1;pointer-events:auto}
+.gx-stepper-arrows button{
+  box-sizing:border-box;width:10px;height:10px;padding:0;border:0;border-radius:var(--dsw-radius-xs,4px);
+  display:inline-flex;align-items:center;justify-content:center;cursor:pointer;
+  color:var(--dsw-alias-label-primary);background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 75%,transparent);
+}
+.gx-stepper-arrows button:hover:not(:disabled){background:var(--dsw-alias-bg-layer-1)}
+.gx-stepper-arrows button:disabled{opacity:.45;cursor:default}
+.gx-unit{font-size:12px;min-width:14px;color:color-mix(in srgb,var(--dsw-alias-label-secondary) 50%,transparent)}
+
+/* ---------- 按钮 / 壁纸 ---------- */
+.gx-btn{
+  box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;flex:none;
+  height:32px;padding:0 12px;border:0;border-radius:var(--dsw-radius-md,8px);cursor:pointer;white-space:nowrap;
+  background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);
+  box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 14%,transparent),0 1px 2px rgba(19,45,83,.06);
+  font-family:inherit;font-size:13px;line-height:20px;color:var(--dsw-alias-label-primary);
+}
+.gx-btn:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover)}
+.gx-btn:disabled{opacity:.5;cursor:default}
+.gx-btn.danger{background:var(--dsw-alias-button-primary-fill);color:var(--dsw-alias-label-primary-foreground)}
+.gx-btn.danger:hover:not(:disabled){background:var(--dsw-alias-button-primary-hover)}
+.gx-wallpaper{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:420px}
+.gx-thumb{
+  width:84px;height:48px;border-radius:8px;overflow:hidden;flex:0 0 auto;background:#dbe4ef;
+  box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 14%,transparent);
+}
+.gx-thumb img,.gx-thumb video{width:100%;height:100%;object-fit:cover;display:block}
+.gx-thumb-empty{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:color-mix(in srgb,var(--dsw-alias-label-secondary) 60%,transparent);
+}
+.gx-note{
+  margin:6px 0 0;font-size:12px;line-height:18px;
+  color:color-mix(in srgb,var(--dsw-alias-label-secondary) 68%,transparent);
+}
+.gx-error{color:#C8436F}
+
+/* ---------- 重点色 ---------- */
+.gx-swatches{display:flex;align-items:center;gap:6px}
+.gx-sw{
+  width:18px;height:18px;border-radius:50%;border:0;padding:0;cursor:pointer;
+  background:var(--gx-c);
+  box-shadow:0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 24%,transparent);
+}
+.gx-sw.on{box-shadow:0 0 0 2px var(--dsw-alias-bg-layer-1),0 0 0 3.5px color-mix(in srgb,var(--dsw-alias-label-primary) 38%,transparent)}
+.gx-sw.white{box-shadow:0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 34%,transparent)}
+.gx-sw.white.on{box-shadow:0 0 0 2px var(--dsw-alias-bg-layer-1),0 0 0 3.5px color-mix(in srgb,var(--dsw-alias-label-primary) 38%,transparent)}
+.gx-custom{
+  position:relative;width:22px;height:22px;border-radius:50%;border:0;padding:0;cursor:pointer;flex:0 0 auto;
+  background:conic-gradient(from 30deg,#f77,#fc6,#ff6,#7d7,#6cf,#a7f,#f77);
+}
+.gx-custom::after{
+  content:"";position:absolute;inset:3px;border-radius:50%;background:var(--glass-accent);
+  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.5);
+}
+.gx-custom input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0}
+.gx-hex{
+  font-size:12px;min-width:58px;letter-spacing:.02em;font-variant-numeric:tabular-nums;
+  color:color-mix(in srgb,var(--dsw-alias-label-secondary) 50%,transparent);
+}
+
+/* ---------- 深色微调 ---------- */
+body[data-ds-dark-theme] .gx-thumb{background:#243141}
+
+body[data-ds-dark-theme] .gx-error{color:#F08CAE}

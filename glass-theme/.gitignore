@@ -1,0 +1,18 @@
+node_modules/
+*.log
+*.bak
+*.bak-*
+
+# 用户上传的壁纸与本机状态（保留出厂 默认壁纸.jpg）
+壁纸/state.json
+壁纸/wallpaper-*.jpg
+壁纸/wallpaper-*.jpeg
+壁纸/wallpaper-*.png
+壁纸/wallpaper-*.webp
+壁纸/wallpaper-*.gif
+壁纸/wallpaper-*.bmp
+壁纸/wallpaper-*.avif
+壁纸/wallpaper-*.mp4
+壁纸/wallpaper-*.webm
+壁纸/wallpaper-*.mov
+壁纸/wallpaper-*.m4v
