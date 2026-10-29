@@ -1,0 +1,111 @@
+/* DSH启动动画 · 宿主层补充样式
+   这份 CSS 在构建时和参考实现的 style.css / fonts.css / host.css 一起被改写进 Shadow DOM：
+   所有 :root → :host、body → .dslan-body、html → :host。 */
+
+/* 宿主元素本身：铺满视口、不吃点击（点击交给覆盖层里的按钮），不参与页面排版 */
+.dslan-host {
+  position: fixed;
+  inset: 0;
+  display: block;
+  z-index: 2147483647;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Windows 标题栏那一条：让系统画的最小化/最大化/关闭按钮有合适对比度，
+   同时保留窗口拖拽（-webkit-app-region: drag + 不吃点击）。 */
+.dslan-body.embedded .window:before {
+  content: "";
+  position: absolute;
+  z-index: 40;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--dslan-titlebar, 40px);
+  -webkit-app-region: drag;
+  pointer-events: none;
+  background: transparent;
+}
+:host(.dslan-light) .dslan-body.embedded .window:before {
+  background: transparent;
+}
+:host(.dslan-dark) .dslan-body.embedded .window:before {
+  background: transparent;
+}
+
+/* 预览专用控件：元素必须存在（引擎会绑定），但不该出现在开机画面上 */
+.dslan-body.embedded .controls,
+.dslan-body.embedded #image-settings,
+.dslan-body.embedded .traffic {
+  display: none !important;
+}
+
+/* 覆盖层期间：整个宿主要能接收「点击跳过」 */
+.dslan-host .skip {
+  pointer-events: auto;
+}
+
+/* ---- 预览页专用：宿主层 CSS 把 .window 定成满屏，预览里要还原成参考实现那张卡片 ---- */
+.dslan-preview-stage .dslan-host {
+  position: relative;
+  inset: auto;
+  z-index: 1;
+}
+.dslan-body:not(.embedded) {
+  overflow: visible;
+  background: transparent;
+}
+.dslan-body:not(.embedded) .window {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.52;
+  border: 1px solid #ffffff28;
+  border-radius: 13px;
+  box-shadow: 0 40px 90px #0008, 0 0 0 1px #0005;
+}
+
+/* 没开跳过提示时（设置里可关），把跳过按钮藏掉；Esc 仍然可用 */
+.dslan-body.dslan-no-skip .skip {
+  display: none !important;
+}
+
+/* ---- 尺寸兜底（2026-10-08）----
+   不依赖上面那套 :root/body → Shadow DOM 的改写：
+   万一改写再出问题，这两条也能保证覆盖层有满屏尺寸，不会再出现「0×0 透明挡点击」。 */
+.dslan-body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: block;
+}
+.dslan-body.embedded .window {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ---- 视口单位兜底（2026-10-08 第二次修复）----
+   实测：在插件（embedded）场景里，`.dslan-body` 的 height:100% 没有解析出高度，
+   连带 `.window` 的 height:100% 也算成 0 → 整层 0×0「透明挡点击」。
+   预览页之所以正常，是因为它靠 aspect-ratio 定了高，绕过了百分比解析。
+   这里直接改用视口单位：不依赖任何父级高度解析，也不会被 overflow 裁掉。 */
+.dslan-body.embedded {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  overflow: visible;
+  display: block;
+}
+.dslan-body.embedded .window {
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}

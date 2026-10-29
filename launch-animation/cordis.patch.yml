@@ -1,0 +1,5 @@
+# dsh-launch-animation bundle patch：把这个插件插进 profile 的层叠里。
+# row id 与包名保持一致；客户端半边据此挂载（lib/client.js 里的 id 必须逐字等于包名）。
+- insert:
+    - id: dsh-launch-animation
+      name: 'dsh-launch-animation'

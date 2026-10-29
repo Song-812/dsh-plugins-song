@@ -1,0 +1,83 @@
+<main class="dslan-root">
+  <section class="window" aria-label="DSH 启动动画">
+    <div class="end-screen" aria-live="polite">
+      <span class="end-star">✧</span>
+      <p class="eyebrow">CONNECTION ESTABLISHED</p>
+      <h1>DEEPSEEK HARNESS，已准备就绪。</h1>
+      <p class="end-description">启动序列完成</p>
+      <button class="replay-end" type="button">再看一次 <span>↻</span></button>
+    </div>
+    <div class="scene" aria-hidden="true">
+      <img class="artwork" src="" alt="" decoding="async" fetchpriority="high">
+      <canvas class="line-art" width="1536" height="1024"></canvas>
+      <div class="shade"></div>
+      <div class="scanlines"></div>
+      <div class="light-sweep"></div>
+      <div class="particles"></div>
+      <div class="hud">
+        <div class="corner top-left"></div><div class="corner top-right"></div>
+        <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+        <div class="sync">
+          <div class="sync-label"><span>BOOT RATIO</span><span id="ratio">00.00%</span></div>
+          <div class="sync-track"><div class="sync-fill"></div></div>
+          <span class="sync-phase">INITIALIZING</span>
+        </div>
+        <div class="subtitle"><span id="subtitle">正在唤醒 DeepSeek Harness</span></div>
+        <div class="coordinates"><span>DEEPSEEK HARNESS / DSH</span><span id="timecode">00:00:00</span></div>
+      </div>
+      <div class="boot-grid"></div>
+      <div class="boot-corners"><i class="corner top-left"></i><i class="corner top-right"></i><i class="corner bottom-left"></i><i class="corner bottom-right"></i></div>
+      <div class="intro">
+        <div class="pulse"><i></i><i></i><b></b></div>
+        <div class="identity">
+          <div class="radar">
+            <svg class="dial" viewBox="0 0 400 400"><circle cx="200" cy="200" r="177"/><circle class="dashed" cx="200" cy="200" r="151"/><g class="ticks"></g><path class="crosshair" d="M200 9V61 M200 339V391 M9 200H61 M339 200H391"/></svg>
+            <div class="avatar-frame"><img class="avatar" src="" alt="" decoding="async"></div>
+            <i class="reticle tl"></i><i class="reticle tr"></i><i class="reticle bl"></i><i class="reticle br"></i>
+          </div>
+          <svg class="wave" viewBox="0 0 400 22"><path d="M0 11 Q15 5 30 11 T60 11 T90 11 T120 11 T150 11 T180 11 T210 11 T240 11 T270 11 T300 11 T330 11 T360 11 T400 11"/></svg>
+          <div class="boot-title">DEEPSEEK HARNESS</div>
+          <div class="boot-caption">DSH INITIALIZE / HARNESS CORE</div>
+        </div>
+      </div>
+      <div class="boot-logs">
+        <div>&gt; deepseek harness · kernel 0.2.0-rc.2</div>
+        <div>&gt; loading profile bundles ............ ok</div>
+        <div>&gt; mounting web shell ................. ok</div>
+        <div>&gt; connecting host bridge ............. ok</div>
+        <div>&gt; restoring session store ............ ok</div>
+        <div>&gt; registering client slots ........... ok</div>
+        <div>&gt; tools / skills / jobs .............. ready</div>
+        <div>&gt; all systems nominal · handover</div>
+      </div>
+      <div class="transition-flash" aria-hidden="true"></div>
+    </div>
+    <div class="shutter-line" aria-hidden="true"></div>
+    <div class="traffic" aria-hidden="true"><i></i><i></i><i></i></div>
+    <button id="image-settings" type="button">图片设置</button>
+    <button class="skip" type="button" title="跳过动画（Esc）" aria-label="跳过动画">CLICK / ESC TO SKIP</button>
+    <p id="asset-error" hidden>动画素材加载失败，请确认插件 assets 目录完整。</p>
+    <dialog id="settings-dialog" aria-labelledby="settings-title">
+      <form method="dialog"><button class="settings-close" aria-label="关闭">×</button></form>
+      <p class="eyebrow">YOUR STARTUP</p><h2 id="settings-title">换成你喜欢的画面</h2>
+      <p class="settings-description">这里的改动只在本预览窗口内生效。正式素材请通过项目里的素材管线重新生成。</p>
+      <div class="image-choices">
+        <label class="image-choice"><img id="avatar-preview" src="" alt="当前身份图"><span>前半段身份图</span><small>方形图片效果最好</small><span class="choose-label">更换身份图</span><input id="avatar-file" type="file" accept="image/png,image/jpeg,image/webp" aria-label="更换身份图"></label>
+        <label class="image-choice"><img id="artwork-preview" src="" alt="当前成品图"><span>后半段成品图</span><small>推荐 3:2 横图 · 自动生成线稿</small><span class="choose-label">更换成品图</span><input id="artwork-file" type="file" accept="image/png,image/jpeg,image/webp" aria-label="更换成品图"></label>
+      </div>
+      <div class="text-settings">
+        <label for="intro-title">前半段 · 标题<input id="intro-title" type="text" maxlength="16" autocomplete="off"><small>最多 16 字</small></label>
+        <label for="intro-caption">前半段 · 副标题<input id="intro-caption" type="text" maxlength="48" autocomplete="off"><small>最多 48 字</small></label>
+        <label class="text-wide" for="artwork-subtitle">后半段 · 字幕<input id="artwork-subtitle" type="text" maxlength="60" autocomplete="off"><small>最多 60 字</small></label>
+      </div>
+      <label class="wallpaper-setting" for="wallpaper-strength"><span>背景显现程度</span><output id="wallpaper-value">0%</output><input id="wallpaper-strength" type="range" min="0" max="75" step="1" value="0"><small>本插件不做常驻壁纸，这里保持 0 即可。</small></label>
+      <p id="settings-status" role="status">图片保存在本机，不会上传。</p>
+      <div class="settings-actions"><button id="reset-images" type="button">恢复默认</button><button id="preview-images" type="button">保存并预览</button></div>
+    </dialog>
+  </section>
+  <footer class="controls">
+    <div class="playback-buttons"><button id="replay" type="button" aria-label="重播"><span>↻</span> 重播</button><button id="pause" type="button">暂停</button></div>
+    <input id="timeline" aria-label="动画时间轴" type="range" min="0" max="12" step="0.01" value="0">
+    <output id="elapsed">00.0 <span>/ 12.0s</span></output>
+  </footer>
+</main>

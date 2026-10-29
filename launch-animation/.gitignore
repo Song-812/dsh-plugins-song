@@ -1,0 +1,7 @@
+# Python 运行/构建残留（可再生）
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+*.log
