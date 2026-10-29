@@ -1,0 +1,1083 @@
+/* 玻璃主题 · 全局样式
+ *
+ * 对照清单：docs/visual-checklist.md（表面意图 / token / 现象）。
+ * 分十段：字体 / 变量 / 背景层 / 透明化 / 玻璃面板 / 浮层 / 消息内容 /
+ * 插件页 / 控件 / 细节与深色。所有规则挂在 <html data-glass> 下，
+ * 插件停用即整块失效。
+ */
+/* ---------- 1. 字体（Space Grotesk 三段子集，主机路由提供） ---------- */
+@font-face{font-family:"Space Grotesk Variable";font-style:normal;font-display:swap;font-weight:300 700;src:url("/api/glass-theme/font?i=1") format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Space Grotesk Variable";font-style:normal;font-display:swap;font-weight:300 700;src:url("/api/glass-theme/font?i=2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Space Grotesk Variable";font-style:normal;font-display:swap;font-weight:300 700;src:url("/api/glass-theme/font?i=3") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+/* ---------- 2. 变量 ---------- */
+html[data-glass]{
+  --glass-accent:#F077AF;
+  --glass-accent-ink:#13243E;
+  --glass-blur:14px;
+  --glass-frost:.24;
+  --glass-surface-frost:.64;
+  --glass-wallpaper-blur:0px;
+  --glass-wallpaper-frost:0;
+  --glass-video-blur:6px;
+  --glass-video-dim:.3575;
+  --glass-brightness-white:0;
+  --glass-brightness-black:0;
+  --glass-card-light:color-mix(in srgb, #fff calc(42% * var(--glass-frost)), transparent);
+  --glass-card-dark:color-mix(in srgb, #22262f calc(50% * var(--glass-frost)), transparent);
+  --glass-edge:#132d530c;
+  --glass-edge-dark:#94b4dc28;
+  --glass-hi:#ffffff40;
+  --glass-hi-dark:#ffffff12;
+  --glass-shadow:0 6px 22px #132d530e;
+  --glass-shadow-dark:0 6px 22px #02060e2e;
+  --glass-radius:20px;
+  --glass-spot-color:color-mix(in srgb,var(--glass-accent) 20%,transparent);
+}
+html[data-glass] body{
+  background:var(--dsw-alias-bg-base);
+  --dsw-font-family:'Space Grotesk Variable',-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  accent-color:var(--glass-accent);
+}
+/* 重点色：主按钮、选中态、侧栏强调、悬停淡染。全部由 --glass-accent 推导。 */
+html[data-glass] body:not([data-ds-dark-theme]){
+  --dsw-alias-border-l3:transparent!important;
+  --dsw-alias-border-l2:rgba(19,45,83,.06)!important;
+  --dsw-alias-button-elevated-fill:color-mix(in srgb,#fff calc(50% * var(--glass-surface-frost)),transparent)!important;
+  --dsw-alias-state-business-primary:var(--glass-accent)!important;
+  --dsw-alias-state-business-tertiary:color-mix(in srgb,var(--glass-accent) 18%,#fff)!important;
+  --dsw-alias-button-primary-fill:var(--glass-accent)!important;
+  --dsw-alias-button-primary-hover:color-mix(in srgb,var(--glass-accent) 78%,#fff)!important;
+  --dsw-alias-button-primary-dimmed:color-mix(in srgb,var(--glass-accent) 22%,#fff)!important;
+  --dsw-alias-button-info-fill:var(--glass-accent)!important;
+  --dsw-alias-button-info-hover:color-mix(in srgb,var(--glass-accent) 78%,#fff)!important;
+  --dsw-alias-button-floating-fill:color-mix(in srgb,#fff calc(62% * var(--glass-surface-frost)),transparent)!important;
+  --dsw-alias-button-floating-hover:color-mix(in srgb,var(--glass-accent) 10%,transparent)!important;
+  --dsw-alias-button-ghost-active-fill:color-mix(in srgb,var(--glass-accent) 14%,#fff)!important;
+  --dsw-alias-button-ghost-active-hover:color-mix(in srgb,var(--glass-accent) 8%,#fff)!important;
+  --dsw-alias-button-ghost-active-border:color-mix(in srgb,var(--glass-accent) 40%,#fff)!important;
+  --dsw-alias-label-primary-bluish:var(--glass-accent)!important;
+  --dsw-alias-brand-primary:var(--glass-accent)!important;
+  --dsw-alias-interactive-bg-hover:color-mix(in srgb,var(--glass-accent) 10%,transparent)!important;
+  --dsw-alias-interactive-bg-active:color-mix(in srgb,var(--glass-accent) 16%,transparent)!important;
+  --dsw-alias-interactive-bg-hover-accent:color-mix(in srgb,var(--glass-accent) 14%,transparent)!important;
+  --dsw-specific-sidebar-nav-item-active-accent:var(--glass-accent)!important;
+  --dsw-specific-sidebar-nav-item-active:color-mix(in srgb,var(--glass-accent) 14%,transparent)!important;
+  --dsw-specific-sidebar-nav-item-hover:color-mix(in srgb,var(--glass-accent) 10%,transparent)!important;
+  --dsw-alias-label-secondary:#152C45!important;
+  --dsw-alias-label-tertiary:#1A3350!important;
+  --dsw-alias-label-caption:#1C3854!important;
+  --accent:var(--glass-accent)!important;
+  --dsw-specific-sidebar-fill:transparent!important;
+  --dsw-alias-bg-layer-1:color-mix(in srgb,#fff calc(55% * var(--glass-frost)),transparent)!important;
+  --dsw-alias-interactive-bg-hover-solid:color-mix(in srgb,var(--glass-accent) 8%,transparent)!important;
+}
+html[data-glass] body[data-ds-dark-theme]{
+  --dsw-alias-border-l3:transparent!important;
+  --dsw-alias-border-l2:rgba(148,180,220,.10)!important;
+  --dsw-alias-button-elevated-fill:color-mix(in srgb,#2a2e38 calc(50% * var(--glass-surface-frost)),transparent)!important;
+  --dsw-alias-state-business-primary:var(--glass-accent)!important;
+  --dsw-alias-state-business-tertiary:color-mix(in srgb,var(--glass-accent) 24%,#0C121B)!important;
+  --dsw-alias-button-primary-fill:var(--glass-accent)!important;
+  --dsw-alias-button-primary-hover:color-mix(in srgb,var(--glass-accent) 72%,#fff)!important;
+  --dsw-alias-button-primary-dimmed:color-mix(in srgb,var(--glass-accent) 26%,#0C121B)!important;
+  --dsw-alias-button-info-fill:var(--glass-accent)!important;
+  --dsw-alias-button-info-hover:color-mix(in srgb,var(--glass-accent) 72%,#fff)!important;
+  --dsw-alias-button-floating-fill:color-mix(in srgb,#2a2e38 calc(62% * var(--glass-surface-frost)),transparent)!important;
+  --dsw-alias-button-floating-hover:color-mix(in srgb,var(--glass-accent) 14%,transparent)!important;
+  --dsw-alias-button-ghost-active-fill:color-mix(in srgb,var(--glass-accent) 18%,#0C121B)!important;
+  --dsw-alias-button-ghost-active-hover:color-mix(in srgb,var(--glass-accent) 10%,#0C121B)!important;
+  --dsw-alias-button-ghost-active-border:color-mix(in srgb,var(--glass-accent) 45%,#0C121B)!important;
+  --dsw-alias-label-primary-bluish:var(--glass-accent)!important;
+  --dsw-alias-brand-primary:var(--glass-accent)!important;
+  --dsw-alias-interactive-bg-hover:color-mix(in srgb,var(--glass-accent) 14%,transparent)!important;
+  --dsw-alias-interactive-bg-active:color-mix(in srgb,var(--glass-accent) 22%,transparent)!important;
+  --dsw-alias-interactive-bg-hover-accent:color-mix(in srgb,var(--glass-accent) 18%,transparent)!important;
+  --dsw-specific-sidebar-nav-item-active-accent:var(--glass-accent)!important;
+  --dsw-specific-sidebar-nav-item-active:color-mix(in srgb,var(--glass-accent) 20%,transparent)!important;
+  --dsw-specific-sidebar-nav-item-hover:color-mix(in srgb,var(--glass-accent) 14%,transparent)!important;
+  --dsw-alias-label-secondary:#DCE7F5!important;
+  --dsw-alias-label-tertiary:#CBD9EA!important;
+  --dsw-alias-label-caption:#C2D2E6!important;
+  --accent:var(--glass-accent)!important;
+  --dsw-specific-sidebar-fill:transparent!important;
+  --dsw-alias-bg-layer-1:color-mix(in srgb,#0d1622 calc(60% * var(--glass-frost)),transparent)!important;
+  --dsw-alias-interactive-bg-hover-solid:color-mix(in srgb,var(--glass-accent) 12%,transparent)!important;
+}
+
+/* ---------- 3. 背景层 ---------- */
+html[data-glass] [data-glass-bg]{
+  position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;
+}
+html[data-glass] [data-glass-bg] img,
+html[data-glass] [data-glass-bg] video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+}
+html[data-glass] [data-glass-bg][data-media=image] video,
+html[data-glass] [data-glass-bg][data-media=video] img{display:none}
+/* 壁纸/视频只做 blur；亮度不走 filter（避免像对比度压中间调） */
+html[data-glass] [data-glass-bg] img{filter:blur(var(--glass-wallpaper-blur))}
+html[data-glass] [data-glass-bg] video{filter:blur(var(--glass-video-blur))}
+/* 背景亮度：显式子节点黑/白膜（::before 会被 img/video 盖住）。50=全透明 */
+html[data-glass] [data-glass-bg] [data-glass-dim]{
+  position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:
+    linear-gradient(rgba(255,255,255,var(--glass-brightness-white)),rgba(255,255,255,var(--glass-brightness-white))),
+    linear-gradient(rgba(0,0,0,var(--glass-brightness-black)),rgba(0,0,0,var(--glass-brightness-black)));
+}
+/* 壁纸磨砂：::after 软雾面，叠在亮度膜之上；与黑白膜分离 */
+html[data-glass] [data-glass-bg]::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:rgb(255 255 255/var(--glass-wallpaper-frost));
+}
+html[data-glass] body[data-ds-dark-theme] [data-glass-bg]::after{
+  background:rgb(12 18 27/var(--glass-wallpaper-frost));
+}
+/* 视频：::after 改走 videoBrightness 压暗雾；亮度黑白仍由 data-glass-dim 负责，两层可叠 */
+html[data-glass] [data-glass-bg][data-media=video]::after{
+  background:rgb(255 255 255/calc(var(--glass-video-dim) * 1.3));
+}
+html[data-glass] body[data-ds-dark-theme] [data-glass-bg][data-media=video]::after{
+  background:rgb(8 12 20/var(--glass-video-dim));
+}
+
+/* ---------- 4. 主体透明化（让壁纸透出来） ---------- */
+html[data-glass] [class*=centerCol],
+html[data-glass] [class*=rightbarCol],
+html[data-glass] [data-testid=conversation],
+html[data-glass] [class*=conversation],
+html[data-glass] [class*=threadCol],
+html[data-glass] [class*=chatCol],
+html[data-glass] [class*=contentCol],
+html[data-glass] [class*=mainCol],
+html[data-glass] [class*=sessionCol],
+html[data-glass] [data-dsh-frame],
+html[data-glass] [data-phase],
+html[data-glass] [class$="_frame"],
+html[data-glass] [class*=quietBars],
+html[data-glass] #root{background:transparent!important}
+/* B2：去掉 composerSeat 不透明底条，避免底部左右白块。
+   宿主 .composerSeat 特异性 (0,3,0)，双属性选择器才能压过，否则底部左右实心白块。 */
+html[data-glass] [data-phase] [class*=composerSeat][class*=composerSeat]{
+  background:none!important;
+}
+html[data-glass] [data-sidebar-right-panel] [data-dockkit-pane],
+html[data-glass] [data-sidebar-right-panel] [data-dockkit-pane-body],
+html[data-glass] [data-sidebar-right-panel] [data-dockkit-content],
+html[data-glass] [data-sidebar-right-panel] [data-sidebar-right-session],
+html[data-glass] [data-sidebar-right-panel] [data-sidebar-right-tab]{background:transparent!important}
+html[data-glass] [data-sidebar-right-panel]{
+  --dsw-alias-bg-layer-1:color-mix(in srgb,#fff calc(55% * var(--glass-frost)),transparent)!important;
+  --dsw-alias-bg-base:transparent!important;
+}
+html[data-glass] body[data-ds-dark-theme] [data-sidebar-right-panel]{
+  --dsw-alias-bg-layer-1:color-mix(in srgb,#0d1622 calc(60% * var(--glass-frost)),transparent)!important;
+  --dsw-alias-bg-base:transparent!important;
+}
+
+/* ---------- 5. 玻璃面板 ---------- */
+/* B1：Windows 顶栏全宽磨砂（不当成会话浮动卡） */
+html[data-glass] header[data-window-drag],
+html[data-glass] header[data-window-drag=true]{
+  background:var(--glass-card-light)!important;
+  backdrop-filter:blur(var(--glass-blur))!important;
+  -webkit-backdrop-filter:blur(var(--glass-blur))!important;
+  border:none!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  margin:0!important;
+}
+html[data-glass] body[data-ds-dark-theme] header[data-window-drag],
+html[data-glass] body[data-ds-dark-theme] header[data-window-drag=true]{
+  background:var(--glass-card-dark)!important;
+}
+/* 官方插件页顶栏（[data-plugin-panel] > header）也带 data-window-drag 做拖窗，
+   不能套上面 Windows 顶栏磨砂；宿主本身无底色，保持透明。非 sticky，去底后无内容穿插。 */
+html[data-glass] [data-plugin-panel] > header[data-window-drag],
+html[data-glass] [data-plugin-panel] > header[data-window-drag=true]{
+  background:transparent!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  border:none!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  margin:0!important;
+}
+/* P1：会话顶栏 = 开口朝下的圆弧浮动卡（header + scroll tuck）
+   现象：四角全圆 + 底部分隔/阴影 ⇒ 像独立 UI 条。
+   做法：上圆下开、去掉底边与底阴影、正文列上滑到卡下、工具组去描边。 */
+html[data-glass] [data-phase] header{
+  background:var(--glass-card-light)!important;
+  backdrop-filter:blur(var(--glass-blur))!important;
+  -webkit-backdrop-filter:blur(var(--glass-blur))!important;
+  /* 侧/顶沿用玻璃边，底边完全打开（不只改 color，连 width 也清掉） */
+  border:1px solid rgba(19,45,83,.18)!important;
+  border-bottom:none!important;
+  /* 上圆下开：与正文连成一张开口朝下的卡，而不是封闭条带 */
+  border-radius:20px 20px 0 0!important;
+  /* 阴影只落在顶/侧，避免底边一道「悬浮条」投影把卡封死 */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.42),
+    -10px 4px 28px -12px rgba(19,45,83,.14),
+    10px 4px 28px -12px rgba(19,45,83,.14)!important;
+  margin:12px 16px 0!important;
+  padding:10px 16px 8px!important;
+  z-index:8!important;
+  position:relative!important;
+  background-clip:padding-box!important;
+  isolation:isolate;
+}
+html[data-glass] [data-phase] header::after,
+html[data-glass] [data-phase] header::before{content:none!important;display:none!important}
+html[data-glass] body[data-ds-dark-theme] [data-phase] header{
+  background:var(--glass-card-dark)!important;
+  border-color:rgba(148,180,220,.28)!important;
+  border-bottom:none!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    -10px 4px 28px -12px rgba(2,6,14,.28),
+    10px 4px 28px -12px rgba(2,6,14,.28)!important;
+}
+html[data-glass] [data-phase='active'] header,
+html[data-glass] [data-phase=active] header{position:relative!important;z-index:8!important}
+/* 侧栏收起时顶栏右移，避免压到浮动轨 */
+html[data-glass] [data-dsh-frame][data-sidebar-collapsed] [data-phase] header{margin-left:28px!important}
+/* 把整列正文（body）上滑到顶栏后面；padding 落在 scroll 上，内容从卡下露出来 */
+html[data-glass] [data-phase='active'] [data-conversation-content],
+html[data-glass] [data-phase=active] [data-conversation-content]{
+  margin-top:-95px!important;
+  position:relative;
+  z-index:1;
+  overflow:visible!important;
+}
+html[data-glass] [data-phase='active'] [data-conversation-scroll],
+html[data-glass] [data-phase=active] [data-conversation-scroll]{
+  margin-top:0!important;
+  padding-top:107px!important;
+  position:relative;
+  z-index:1;
+}
+/* 浮动顶栏会拆掉代码块 banner 的 sticky 锚点，改为随正文滚 */
+html[data-glass] [data-phase] [class*=banner]{position:static!important}
+/* 右上角工具组：容器与按钮都去描边/实底，只留悬停淡染 */
+html[data-glass] [data-phase] header [class*=headerActions],
+html[data-glass] [data-phase] header [class*=headerUtilities],
+html[data-glass] [data-phase] header [class*=headerCorner],
+html[data-glass] [class*=headerActions],
+html[data-glass] [class*=headerUtilities]{
+  border:none!important;
+  outline:none!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+html[data-glass] [data-phase] header [class*=headerActions] button,
+html[data-glass] [data-phase] header [class*=headerUtilities] button,
+html[data-glass] [data-phase] header [class*=headerCorner] button,
+html[data-glass] [data-phase] header [class*=iconButton],
+html[data-glass] [class*=headerActions] button,
+html[data-glass] [class*=headerUtilities] button{
+  border:none!important;
+  outline:none!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+html[data-glass] [data-phase] header [class*=headerActions] button:hover,
+html[data-glass] [data-phase] header [class*=headerUtilities] button:hover,
+html[data-glass] [data-phase] header [class*=headerCorner] button:hover,
+html[data-glass] [data-phase] header [class*=iconButton]:hover,
+html[data-glass] [class*=headerActions] button:hover,
+html[data-glass] [class*=headerUtilities] button:hover{
+  background:color-mix(in srgb,var(--glass-accent) 10%,transparent)!important;
+  box-shadow:none!important;
+}
+/* 主列本身不另套描边卡，避免与顶栏浮动卡叠成双框 */
+html[data-glass] [data-phase],
+html[data-glass] [class*=centerCol]{
+  background:transparent!important;
+  border:none!important;
+  box-shadow:none!important;
+  outline:none!important;
+}
+html[data-glass] body[data-windows-titlebar] [class*=centerCol],
+html[data-glass] body[data-windows-titlebar] [class*=rightbarCol]{border-radius:0!important}
+/* 侧栏玻璃卡：磨砂放在显式子节点 [data-glass-sidebar-fill]（seams 插入）。
+   Electron 上伪元素 backdrop-filter 经常不糊；侧栏自身仍不挂 backdrop，
+   避免把 Windows 标题栏里 position:fixed 的收起按钮困进包含块。 */
+html[data-glass] [class*=sidebarCol]{
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  border:1px solid #132d5312;
+  border-radius:var(--glass-radius);
+  box-shadow:var(--glass-shadow);
+  margin:12px;padding:10px 12px 14px;
+  z-index:9;position:relative;overflow:hidden;
+  isolation:isolate; /* 困住 fill 的 z-index:-1，不漏到壁纸后面 */
+}
+html[data-glass] [class*=sidebarCol] > [data-glass-sidebar-fill]{
+  position:absolute;
+  inset:0;
+  z-index:-1!important;
+  border-radius:inherit;
+  pointer-events:none;
+  background:var(--glass-card-light);
+  backdrop-filter:blur(var(--glass-blur));
+  -webkit-backdrop-filter:blur(var(--glass-blur));
+}
+/* 排除 fill：内容压在磨砂层之上，字/图标可读 */
+html[data-glass] [class*=sidebarCol] > *:not([data-glass-sidebar-fill]){
+  position:relative;
+  z-index:1;
+}
+html[data-glass] body[data-ds-dark-theme] [class*=sidebarCol]{
+  border-color:#94b4dc28;
+  box-shadow:var(--glass-shadow-dark);
+}
+html[data-glass] body[data-ds-dark-theme] [class*=sidebarCol] > [data-glass-sidebar-fill]{
+  background:var(--glass-card-dark);
+}
+/* Windows：收起侧栏钉在系统标题栏左上（对照宿主 [data-windows-titlebar] .toggle）
+   只打侧栏里的 iconButton.toggle，避免误伤设置页等其它 toggle。 */
+html[data-glass] body[data-windows-titlebar] [class*=sidebarCol] [class*=toggle][class*=iconButton],
+html[data-glass] body[data-windows-titlebar] [data-dsh-sidebar-root] [class*=toggle][class*=iconButton]{
+  position:fixed!important;
+  left:12px!important;
+  top:calc((var(--dsh-windows-titlebar-height,40px) - 28px) / 2)!important;
+  z-index:40!important;
+  width:28px!important;
+  height:28px!important;
+  margin:0!important;
+  -webkit-app-region:no-drag!important;
+  pointer-events:auto!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+/* 设置对话框打开时关掉侧栏 blur（保留 frost 底），避免 fixed 浮层再被困 */
+html[data-glass] [class*=sidebarCol]:has([role=dialog]),
+html[data-glass] [class*=sidebarCol]:has([role=dialog]) > [data-glass-sidebar-fill]{
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html[data-glass] [data-dsh-frame]:not([data-sidebar-collapsed]) [data-dsh-sidebar-root]{width:100%!important}
+html[data-glass] [data-composer-card]{
+  background:var(--glass-card-light);
+  backdrop-filter:blur(var(--glass-blur));
+  border:1px solid #132d5312;
+  border-radius:24px;
+  box-shadow:0 6px 22px #132d530e;
+  z-index:8;position:relative;
+}
+html[data-glass] body[data-ds-dark-theme] [data-composer-card]{
+  background:var(--glass-card-dark);
+  border-color:#94b4dc28;
+  box-shadow:0 8px 28px #02060e40;
+}
+html[data-glass] [data-dsh-stats]{
+  background:var(--glass-card-light);
+  backdrop-filter:blur(var(--glass-blur));
+  border:1px solid #132d5312;border-top-color:#132d5312;
+  border-radius:0 0 24px 24px;
+  box-shadow:0 6px 22px #132d530e;
+  color:#262e3ee6;
+  z-index:8;position:relative;
+}
+html[data-glass] body[data-ds-dark-theme] [data-dsh-stats]{
+  background:var(--glass-card-dark);
+  border-color:#94b4dc3d #94b4dc52 #94b4dc52;
+  color:#e4ecf8eb;
+  box-shadow:0 8px 28px #02060e40;
+}
+html[data-glass] [class*=quietBars]{width:100%!important}
+html[data-glass] [data-dsh-inputbar]:not([class*=hero]){padding-bottom:12px}
+/* 输入框与统计行共用一块玻璃：外壳画玻璃，内部两层都透明 */
+html[data-glass] [data-dsh-inputbar]:has([data-dsh-stats]){
+  width:calc(var(--dsh-chat-content-width) + 32px);max-width:none;margin:0 auto 12px;padding:0;
+  background:var(--glass-card-light);
+  backdrop-filter:blur(var(--glass-blur));
+  border:1px solid #132d5312;border-radius:24px;
+  box-shadow:0 6px 22px #132d530e;
+}
+html[data-glass] body[data-ds-dark-theme] [data-dsh-inputbar]:has([data-dsh-stats]){
+  background:var(--glass-card-dark);
+  border-color:#94b4dc28;
+  box-shadow:0 8px 28px #02060e40;
+}
+html[data-glass] [data-dsh-inputbar]:has([data-dsh-stats]) [data-composer-card]{
+  box-shadow:none;backdrop-filter:none;background:transparent;border:none;border-radius:0;
+}
+html[data-glass] [data-dsh-inputbar]:has([data-dsh-stats]) [data-composer-card]::after{display:none}
+html[data-glass] [data-dsh-inputbar]:has([data-dsh-stats]) [data-dsh-stats]{
+  box-sizing:border-box;width:100%;max-width:none;min-height:24px;
+  box-shadow:none;backdrop-filter:none;background:transparent;
+  border:none;border-top:1px solid #132d531f;border-radius:0;
+  margin:auto 0 0;padding:2px 16px;display:block;
+}
+html[data-glass] body[data-ds-dark-theme] [data-dsh-inputbar]:has([data-dsh-stats]) [data-dsh-stats]{
+  border-top-color:#94b4dc3d;
+}
+html[data-glass] [data-dsh-trajectory]{
+  background:var(--glass-card-light);
+  backdrop-filter:blur(var(--glass-blur));
+  border:1px solid #132d5312;border-radius:var(--glass-radius);
+  box-shadow:inset 0 1px var(--glass-hi),var(--glass-shadow);
+  width:calc(100% - 32px);height:calc(100% - 20px);
+  margin:8px 16px 12px;overflow:hidden;
+}
+html[data-glass] body[data-ds-dark-theme] [data-dsh-trajectory]{
+  background:var(--glass-card-dark);
+  border-color:#94b4dc28;
+  box-shadow:inset 0 1px var(--glass-hi-dark),var(--glass-shadow-dark);
+}
+html[data-glass] [data-dsh-trajectory] [role=toolbar],
+html[data-glass] [data-dsh-trajectory] section[aria-label="Trajectory timeline"]{background:transparent}
+/* B4：新会话 / 底部账号行 — 只打在 button 上（勿用 [class*=newSession]，会误伤 Label/Content 造成双层药丸；账号行用 data-dsh-account，不进 collapsed fixed） */
+html[data-glass] button[data-dsh-surface],
+html[data-glass] button[class*=newSession],
+html[data-glass] button[data-dsh-account]{
+  background:color-mix(in srgb,#fff calc(62% * var(--glass-surface-frost)),transparent)!important;
+  border:none!important;
+  outline:none!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(var(--glass-blur))!important;
+  -webkit-backdrop-filter:blur(var(--glass-blur))!important;
+  border-radius:14px!important;
+  overflow:hidden;
+}
+html[data-glass] button[data-dsh-surface]:hover:not(:disabled),
+html[data-glass] button[class*=newSession]:hover:not(:disabled),
+html[data-glass] button[data-dsh-account]:hover:not(:disabled){
+  background:color-mix(in srgb,#fff calc(74% * var(--glass-surface-frost)),transparent)!important;
+}
+html[data-glass] body[data-ds-dark-theme] button[data-dsh-surface],
+html[data-glass] body[data-ds-dark-theme] button[class*=newSession],
+html[data-glass] body[data-ds-dark-theme] button[data-dsh-account]{
+  background:color-mix(in srgb,#2a2e38 calc(62% * var(--glass-surface-frost)),transparent)!important;
+  border:none!important;
+  box-shadow:none!important;
+}
+html[data-glass] body[data-ds-dark-theme] button[data-dsh-surface]:hover:not(:disabled),
+html[data-glass] body[data-ds-dark-theme] button[class*=newSession]:hover:not(:disabled),
+html[data-glass] body[data-ds-dark-theme] button[data-dsh-account]:hover:not(:disabled){
+  background:color-mix(in srgb,#363a46 calc(70% * var(--glass-surface-frost)),transparent)!important;
+}
+/* 内层 Label/Content/Mask：强制透明，取消任何被误加的底/圆角/阴影 */
+html[data-glass] button[class*=newSession] [class*=newSessionLabel],
+html[data-glass] button[class*=newSession] [class*=newSessionContent],
+html[data-glass] button[class*=newSession] [class*=newSessionLabelMask],
+html[data-glass] button[data-dsh-surface] > *,
+html[data-glass] button[data-dsh-account] > *{
+  background:transparent!important;
+  background-color:transparent!important;
+  border:none!important;
+  outline:none!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  border-radius:0!important;
+}
+/* 宿主悬停显示 Ctrl+N：隐藏 shortcut 节点，不影响点击 */
+html[data-glass] [class*=newSessionShortcut]{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  width:0!important;
+  max-width:0!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+/* T2：Composer「+」圆珠 — frost 磨砂 */
+html[data-glass] [data-dsh-add]{
+  background:color-mix(in srgb,#fff calc(40% * var(--glass-frost)),transparent)!important;
+  border:1px solid #132d531f!important;
+  box-shadow:inset 0 1px var(--glass-hi)!important;
+  backdrop-filter:blur(var(--glass-blur))!important;
+}
+html[data-glass] [data-dsh-add]:hover:not(:disabled){
+  background:color-mix(in srgb,#fff calc(58% * var(--glass-frost)),transparent)!important;
+}
+html[data-glass] body[data-ds-dark-theme] [data-dsh-add]{
+  background:color-mix(in srgb,#2a2e38 calc(40% * var(--glass-frost)),transparent)!important;
+  border-color:#94b4dc40!important;
+  box-shadow:inset 0 1px var(--glass-hi-dark)!important;
+}
+html[data-glass] body[data-ds-dark-theme] [data-dsh-add]:hover:not(:disabled){
+  background:color-mix(in srgb,#363a46 calc(52% * var(--glass-frost)),transparent)!important;
+}
+/* 侧边栏收起：窄栏只当图标条；清掉 ::before 磨砂，让 fixed toggle/newSession 回到视口标题栏 */
+html[data-glass] [data-sidebar-collapsed] [class*=sidebarCol]{
+  min-width:64px!important;margin:0!important;padding:0!important;
+  border-radius:0!important;background:transparent!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  border:0!important;box-shadow:none!important;z-index:60!important;
+  overflow:visible!important;
+}
+html[data-glass] [data-sidebar-collapsed] [class*=sidebarCol] > [data-glass-sidebar-fill]{display:none!important}
+html[data-glass] [data-sidebar-collapsed] [class*=toggle],
+html[data-glass] [data-sidebar-collapsed] [class*=railIn] [class*=iconButton]{
+  z-index:40!important;pointer-events:auto!important;visibility:visible!important;opacity:1!important;
+}
+html[data-glass] body[data-windows-titlebar] [data-sidebar-collapsed] [class*=sidebarCol] [class*=newSession],
+html[data-glass] body[data-windows-titlebar] [data-sidebar-collapsed] [data-dsh-sidebar-root] [class*=newSession]{
+  position:fixed!important;
+  left:48px!important;
+  top:calc((var(--dsh-windows-titlebar-height,40px) - 28px) / 2)!important;
+  z-index:40!important;
+  -webkit-app-region:no-drag!important;
+}
+
+/* Composer primary-action tooltips stay local to their trigger row.
+ * The host emits non-portal fixed bubbles with viewport left/top. Glass blur
+ * and hover transforms establish a different fixed containing block, so those
+ * coordinates otherwise push the bubble outside the scroll body.
+ * Keep React's tooltip node, timing and visibility; override only its geometry.
+ */
+html[data-glass] [data-composer-card] .GRgSLq_trailing{position:relative}
+html[data-glass] [data-composer-card] .GRgSLq_trailing > .GRgSLq_primary + [role=tooltip]:not([data-portal]){
+  position:absolute!important;
+  inset:auto 0 calc(100% + 10px) auto!important;
+  transform:none!important;
+}
+/* Stop and send can coexist: the earlier primary action is one 34px button
+ * plus the host's 12px trailing gap away from the rightmost action. */
+html[data-glass] [data-composer-card] .GRgSLq_trailing > .GRgSLq_primary:has(~ .GRgSLq_primary) + [role=tooltip]:not([data-portal]){
+  right:46px!important;
+}
+
+/* ---------- 6. 浮层 ---------- */
+html[data-glass] body [role=dialog]{
+  backdrop-filter:blur(50px);
+  background:#ffffff73;
+  border-radius:14px;
+}
+html[data-glass] body[data-ds-dark-theme] [role=dialog]{background:#111a278c}
+
+/* 设置顶栏「打开配置文件」：宿主 SettingsDocumentAction（settings.action 槽），对齐 .gx-btn 浅实心胶囊 */
+html[data-glass] body [role=dialog] [class*=AnXs9G_actions] button,
+html[data-glass] body [role=dialog] [class*=yHUiNq_action] > button{
+  height:32px!important;
+  padding:0 12px!important;
+  border:0!important;
+  border-radius:8px!important;
+  cursor:pointer;
+  white-space:nowrap;
+  background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent)!important;
+  box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 14%,transparent),0 1px 2px rgba(19,45,83,.06)!important;
+  font:inherit;
+  font-size:13px!important;
+  color:var(--dsw-alias-label-primary)!important;
+}
+html[data-glass] body [role=dialog] [class*=AnXs9G_actions] button:hover,
+html[data-glass] body [role=dialog] [class*=yHUiNq_action] > button:hover{
+  background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 96%,transparent)!important;
+}
+html[data-glass] body [role=dialog] [class*=AnXs9G_actions] button:disabled,
+html[data-glass] body [role=dialog] [class*=yHUiNq_action] > button:disabled{
+  opacity:.5;
+  cursor:default;
+}
+
+
+/* 思考档位浮层（.dsh-reasoning-model__popover）也用 role=dialog，会被上面 dialog 磨砂误伤。
+   对齐 / 面板与模型菜单实底（T4），去掉透明底与 blur。 */
+html[data-glass] body .dsh-reasoning-model__popover[role=dialog],
+html[data-glass] body .dsh-reasoning-model__popover{
+  background:#FCFDFF!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html[data-glass] body[data-ds-dark-theme] .dsh-reasoning-model__popover[role=dialog],
+html[data-glass] body[data-ds-dark-theme] .dsh-reasoning-model__popover{
+  background:#141A24!important;
+}
+html[data-glass] [role=menu]{
+  background:color-mix(in srgb,#fff calc(62% * var(--glass-frost)),transparent);
+  backdrop-filter:blur(var(--glass-blur));
+  border-radius:14px;
+}
+html[data-glass] body[data-ds-dark-theme] [role=menu]{
+  background:color-mix(in srgb,#1c202a calc(68% * var(--glass-frost)),transparent);
+}
+html[data-glass] body{--dsw-menu-surface-fill:rgba(252,253,255,.94)!important}
+html[data-glass] body[data-ds-dark-theme]{--dsw-menu-surface-fill:rgba(20,26,36,.94)!important}
+html[data-glass] [role=menu],html[data-glass] [role=tooltip],html[data-glass] [role=alert]{border-radius:14px}
+html[data-glass] [role=menuitem],html[data-glass] [role=tooltip],html[data-glass] [class*=pill]{border-radius:8px}
+/* 问题选项「推荐」标（QuestionComposer .badge）：宿主用 accent 底 + button-info-fill 字，
+   我们把 info-fill 也映成 accent 后变成粉字/粉底看不清。只打 optionLine 内小标，勿动 data-glass-badge 铭牌 / 主按钮。 */
+html[data-glass] [class*=optionLine] [class*=badge]{
+  background:color-mix(in srgb,var(--glass-accent) 22%,#fff)!important;
+  color:#152C45!important;
+}
+html[data-glass] body[data-ds-dark-theme] [class*=optionLine] [class*=badge]{
+  background:color-mix(in srgb,var(--glass-accent) 28%,#0C121B)!important;
+  color:#DCE7F5!important;
+}
+/* 选中行：粉字 + 淡粉底（结构上兜住所有菜单） */
+html[data-glass] body:not([data-ds-dark-theme]) [role=menu] button[role=menuitem][class*=selected],
+html[data-glass] body:not([data-ds-dark-theme]) [role=menu] button[role=menuitem][aria-checked=true],
+html[data-glass] body:not([data-ds-dark-theme]) [role=menu] button[role=menuitem][aria-selected=true]{
+  color:var(--glass-accent)!important;
+  background:color-mix(in srgb,var(--glass-accent) 14%,transparent)!important;
+  border-radius:8px;
+}
+html[data-glass] body[data-ds-dark-theme] [role=menu] button[role=menuitem][class*=selected],
+html[data-glass] body[data-ds-dark-theme] [role=menu] button[role=menuitem][aria-checked=true],
+html[data-glass] body[data-ds-dark-theme] [role=menu] button[role=menuitem][aria-selected=true]{
+  color:var(--glass-accent)!important;
+  background:color-mix(in srgb,var(--glass-accent) 18%,transparent)!important;
+  border-radius:8px;
+}
+html[data-glass] [role=menu] button[role=menuitem] > [class*=check]{display:none!important}
+html[data-glass] [data-trigger-menu] kbd{
+  background:#132d5318!important;border:1px solid #132d5320;border-radius:6px;
+  color:var(--dsw-alias-label-secondary)!important;
+}
+html[data-glass] body[data-ds-dark-theme] [data-trigger-menu] kbd{
+  background:#94b4dc2e!important;border-color:#94b4dc42;
+}
+/* 模型菜单：实底，去掉滚动列表上的 blur */
+html[data-glass] [role=menu]:has(.wq12jW_option),
+html[data-glass] *:has(> .wq12jW_groups),
+html[data-glass] [data-menu-material]:has(.wq12jW_groups){
+  background:#FCFDFF!important;backdrop-filter:none!important;
+}
+html[data-glass] body[data-ds-dark-theme] [role=menu]:has(.wq12jW_option),
+html[data-glass] body[data-ds-dark-theme] *:has(> .wq12jW_groups),
+html[data-glass] body[data-ds-dark-theme] [data-menu-material]:has(.wq12jW_groups){
+  background:#141A24!important;backdrop-filter:none!important;
+}
+
+/* ---------- 7. 消息内容（可读性修复） ---------- */
+html[data-glass] [class*=bubble]{
+  background:color-mix(in srgb,#fff calc(42% * var(--glass-frost)),transparent);
+  backdrop-filter:blur(var(--glass-blur));
+  border:1px solid rgba(19,45,83,.06);
+  border-radius:14px;
+  box-shadow:none;
+}
+html[data-glass] body[data-ds-dark-theme] [class*=bubble]{
+  background:color-mix(in srgb,#000 calc(28% + 28% * var(--glass-frost)),transparent);
+  border-color:rgba(148,180,220,.14);
+}
+html[data-glass][data-glass-media=video] [class*=bubble]{background:color-mix(in srgb,#fff calc(55% + 25% * var(--glass-frost)),transparent);border-color:#132d5320}
+html[data-glass][data-glass-media=video] body[data-ds-dark-theme] [class*=bubble]{background:color-mix(in srgb,#000 calc(40% + 30% * var(--glass-frost)),transparent);border-color:#94b4dc38}
+/* 正文卡：只给 assistant 的 response 段一块玻璃 */
+html[data-glass] [data-conversation-scroll] :is([data-chat-flow]:not([data-step-process-content]),[data-slot='conversation.chat.flow'])
+  > [data-chat-flow-kind=assistant-step][data-chat-group-part=response]:not([hidden]):not(:empty):not(:has(> [data-slot='conversation.chat.node']:empty)){
+  box-sizing:border-box;padding:10px 16px;
+  line-height:calc(22px + var(--dsh-content-font-delta,0px));
+  border:1px solid #132d5318;border-radius:14px;
+  background:var(--glass-card-light);
+  backdrop-filter:blur(var(--glass-blur));
+}
+html[data-glass] body[data-ds-dark-theme] [data-conversation-scroll] :is([data-chat-flow]:not([data-step-process-content]),[data-slot='conversation.chat.flow'])
+  > [data-chat-flow-kind=assistant-step][data-chat-group-part=response]:not([hidden]):not(:empty):not(:has(> [data-slot='conversation.chat.node']:empty)){
+  border-color:#94b4dc24;
+  background:color-mix(in srgb,#000 calc(40% * var(--glass-frost)),transparent);
+}
+/* 正文卡内交付物/附件小卡：加厚磨砂底 + 实色字，避免透壁纸发虚 */
+html[data-glass] [data-conversation-scroll] [data-chat-flow-kind=assistant-step][data-chat-group-part=response] [class*=card]{
+  background:color-mix(in srgb,#fff calc(50% + 32% * var(--glass-frost)),transparent)!important;
+  backdrop-filter:blur(calc(var(--glass-blur) + 6px))!important;
+  border:1px solid rgba(19,45,83,.10)!important;
+  box-shadow:none!important;
+}
+html[data-glass] body[data-ds-dark-theme] [data-conversation-scroll] [data-chat-flow-kind=assistant-step][data-chat-group-part=response] [class*=card]{
+  background:color-mix(in srgb,#1a2230 calc(45% + 33% * var(--glass-frost)),transparent)!important;
+  border-color:rgba(148,180,220,.16)!important;
+}
+html[data-glass] [data-conversation-scroll] [data-chat-flow-kind=assistant-step][data-chat-group-part=response] [class*=card] :is([class*=title],[class*=name],[class*=label]){
+  color:#13243E!important;
+  opacity:1!important;
+  text-shadow:none!important;
+  -webkit-font-smoothing:antialiased;
+}
+html[data-glass] [data-conversation-scroll] [data-chat-flow-kind=assistant-step][data-chat-group-part=response] [class*=card] :is([class*=desc],[class*=description],[class*=subtitle],[class*=caption],[class*=meta],p,span){
+  color:#1F3A57!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+html[data-glass] body[data-ds-dark-theme] [data-conversation-scroll] [data-chat-flow-kind=assistant-step][data-chat-group-part=response] [class*=card] :is([class*=title],[class*=name],[class*=label]){
+  color:#E8EEF7!important;
+}
+html[data-glass] body[data-ds-dark-theme] [data-conversation-scroll] [data-chat-flow-kind=assistant-step][data-chat-group-part=response] [class*=card] :is([class*=desc],[class*=description],[class*=subtitle],[class*=caption],[class*=meta],p,span){
+  color:#C2D2E6!important;
+}
+/* 正文卡本身再抬一点对比（配合更高默认模糊） */
+html[data-glass] [data-conversation-scroll] :is([data-chat-flow]:not([data-step-process-content]),[data-slot='conversation.chat.flow'])
+  > [data-chat-flow-kind=assistant-step][data-chat-group-part=response]:not([hidden]):not(:empty):not(:has(> [data-slot='conversation.chat.node']:empty)){
+  border:1px solid rgba(19,45,83,.10);
+}
+html[data-glass] [data-conversation-scroll] .md-table-wide{
+  width:100%!important;max-width:100%!important;margin-left:0!important;padding-left:0!important;overflow-x:auto!important;
+}
+html[data-glass] [data-conversation-scroll] [data-chat-flow-kind=turn-tail]{backdrop-filter:none!important}
+html[data-glass] [data-conversation-scroll]{text-shadow:none!important}
+html[data-glass] [data-conversation-scroll] [data-chat-flow-kind=assistant-step][data-chat-group-part=response] [class*=IAXa_root],
+html[data-glass] [data-conversation-scroll] [data-chat-flow-kind=assistant-step][data-chat-group-part=response] [class*=IAXa_root] :is(p,li,ul,ol,blockquote,td,th,dd,dt){
+  line-height:calc(22px + var(--dsh-content-font-delta,0px));
+}
+/* 工具提示：实底，别被气泡规则误伤 */
+html[data-glass] [role=tooltip],html[data-glass] [role=tooltip][class*=bubble]{
+  background:var(--dsw-alias-tooltip-bg);backdrop-filter:none;
+}
+/* 代码块 / 行内代码 */
+html[data-glass] body{
+  --dsw-alias-markdown-code-block:color-mix(in srgb,#fff calc(42% * var(--glass-frost)),transparent)!important;
+  --dsw-alias-markdown-code-block-banner:color-mix(in srgb,#fff calc(46% * var(--glass-frost)),transparent)!important;
+  --dsw-alias-markdown-inline-code:color-mix(in srgb,#fff calc(36% * var(--glass-frost)),transparent)!important;
+}
+html[data-glass] body[data-ds-dark-theme]{
+  --dsw-alias-markdown-code-block:color-mix(in srgb,#22262f calc(50% * var(--glass-frost)),transparent)!important;
+  --dsw-alias-markdown-code-block-banner:color-mix(in srgb,#22262f calc(54% * var(--glass-frost)),transparent)!important;
+  --dsw-alias-markdown-inline-code:color-mix(in srgb,#22262f calc(44% * var(--glass-frost)),transparent)!important;
+}
+html[data-glass] [class*=block]{
+  --dsl-code-block-border-radius:14px;--dsl-diff-radius:14px;--dsl-read-radius:14px;
+  --dsl-terminal-radius:14px;--dsl-web-radius:14px;--dsl-search-radius:14px;border-radius:14px;
+}
+html[data-glass] [class*=card]{border-radius:14px}
+
+/* ---------- 8. 插件页 / 侧栏列表 ---------- */
+html[data-glass] [data-plugin-panel] [data-plugin-group] ul{gap:8px}
+html[data-glass] [data-plugin-rows] ul{gap:6px}
+html[data-glass] [data-plugin-item],
+html[data-glass] [data-plugin-package],
+html[data-glass] [data-plugin-row],
+html[data-glass] [data-cordis-panel] [data-cordis-row],
+html[data-glass] [data-cordis-row][data-cordis-plugin-id],
+html[data-glass] .mct-card,
+html[data-glass] .dst-card,
+html[data-glass] .plp-card{
+  box-sizing:border-box;
+  border:1px solid #132d5318;border-radius:14px;
+  background:var(--glass-card-light);
+  backdrop-filter:blur(var(--glass-blur));
+  box-shadow:inset 0 1px var(--glass-hi);
+}
+html[data-glass] [data-plugin-row],
+html[data-glass] [data-cordis-panel] [data-cordis-row],
+html[data-glass] [data-cordis-row][data-cordis-plugin-id]{padding:10px 12px}
+html[data-glass] body[data-ds-dark-theme] [data-plugin-item],
+html[data-glass] body[data-ds-dark-theme] [data-plugin-package],
+html[data-glass] body[data-ds-dark-theme] [data-plugin-row],
+html[data-glass] body[data-ds-dark-theme] [data-cordis-panel] [data-cordis-row],
+html[data-glass] body[data-ds-dark-theme] [data-cordis-row][data-cordis-plugin-id],
+html[data-glass] body[data-ds-dark-theme] .mct-card,
+html[data-glass] body[data-ds-dark-theme] .dst-card,
+html[data-glass] body[data-ds-dark-theme] .plp-card{
+  border-color:#94b4dc24;
+  background:color-mix(in srgb,#000 calc(40% * var(--glass-frost)),transparent);
+  box-shadow:inset 0 1px var(--glass-hi-dark);
+}
+html[data-glass] :is([data-plugin-item],[data-plugin-package],.mct-card,.dst-card,.plp-card):hover{
+  background:color-mix(in srgb,#fff calc(56% * var(--glass-frost)),transparent)!important;
+}
+html[data-glass] body[data-ds-dark-theme] :is([data-plugin-item],[data-plugin-package],.mct-card,.dst-card,.plp-card):hover{
+  background:color-mix(in srgb,#2a2e38 calc(64% * var(--glass-frost)),transparent)!important;
+}
+html[data-glass] .mct-cards,html[data-glass] .dst-cards,html[data-glass] .plp-cards{gap:8px}
+html[data-glass] .fO69Vq_card:has(.fO69Vq_skeletonFill){
+  background:none;border:none;box-shadow:none;backdrop-filter:none;
+}
+/* 右侧工具栏面板：与消息卡同配方 */
+html[data-glass] [data-sidebar-right-panel] [data-dockkit-pane]{
+  background:var(--glass-card-light)!important;
+  border:1px solid #132d5318!important;
+  backdrop-filter:blur(var(--glass-blur));
+}
+html[data-glass] body[data-ds-dark-theme] [data-sidebar-right-panel] [data-dockkit-pane]{
+  background:color-mix(in srgb,#000 calc(40% * var(--glass-frost)),transparent)!important;
+  border-color:#94b4dc24!important;
+}
+
+/* ---------- 9. 小控件 ---------- */
+html[data-glass] [data-slot='conversation.input.permission'] button:not(:disabled),
+html[data-glass] [data-slot='conversation.input.model'] button[aria-haspopup=menu]:not(:disabled){
+  box-sizing:border-box;border-radius:8px;
+  background:color-mix(in srgb,#fff calc(40% * var(--glass-frost)),transparent);
+  box-shadow:inset 0 0 0 1px #132d531f,inset 0 1px #ffffff80;
+  color:#16304C!important;
+}
+html[data-glass] [data-slot='conversation.input.permission'] button:hover:not(:disabled),
+html[data-glass] [data-slot='conversation.input.model'] button[aria-haspopup=menu]:is(:hover,[aria-expanded=true]):not(:disabled){
+  background:color-mix(in srgb,#fff calc(58% * var(--glass-frost)),transparent);
+}
+html[data-glass] body[data-ds-dark-theme] [data-slot='conversation.input.permission'] button:not(:disabled),
+html[data-glass] body[data-ds-dark-theme] [data-slot='conversation.input.model'] button[aria-haspopup=menu]:not(:disabled){
+  background:color-mix(in srgb,#2a2e38 calc(40% * var(--glass-frost)),transparent);
+  box-shadow:inset 0 0 0 1px #94b4dc40,inset 0 1px #ffffff14;
+  color:#E4EDF8!important;
+}
+html[data-glass] body[data-ds-dark-theme] [data-slot='conversation.input.permission'] button:hover:not(:disabled),
+html[data-glass] body[data-ds-dark-theme] [data-slot='conversation.input.model'] button[aria-haspopup=menu]:is(:hover,[aria-expanded=true]):not(:disabled){
+  background:color-mix(in srgb,#363a46 calc(52% * var(--glass-frost)),transparent);
+}
+html[data-glass] [data-composer-card] textarea::placeholder,
+html[data-glass] [data-composer-card] [data-composer-placeholder]{
+  color:#1B3550!important;opacity:.38!important;
+}
+html[data-glass] body[data-ds-dark-theme] [data-composer-card] textarea::placeholder,
+html[data-glass] body[data-ds-dark-theme] [data-composer-card] [data-composer-placeholder]{
+  color:#D6E2F1!important;opacity:.38!important;
+}
+html[data-glass] [data-dsh-stats]{color:#18334E!important}
+html[data-glass] [data-dsh-stats] button:not(:disabled){color:#18334E!important}
+html[data-glass] body[data-ds-dark-theme] [data-dsh-stats]{color:#D8E3F2!important}
+html[data-glass] body[data-ds-dark-theme] [data-dsh-stats] button:not(:disabled){color:#D8E3F2!important}
+html[data-glass] [class*=runningContent],
+html[data-glass] [class*=runningText],
+html[data-glass] [class*=runningIcon],
+html[data-glass] [class*=runningWhaleStill],
+html[data-glass] [class*=runningWhaleAnimated]{color:var(--glass-accent)!important}
+html[data-glass] [data-trigger-menu] button[role=option]:hover,
+html[data-glass] [data-trigger-menu] button[role=option][aria-selected=true]{
+  color:var(--glass-accent)!important;
+  background:color-mix(in srgb,var(--glass-accent) 14%,transparent)!important;
+  border-radius:8px;
+}
+html[data-glass] body[data-ds-dark-theme] [data-trigger-menu] button[role=option]:hover,
+html[data-glass] body[data-ds-dark-theme] [data-trigger-menu] button[role=option][aria-selected=true]{
+  background:color-mix(in srgb,var(--glass-accent) 18%,transparent)!important;
+}
+html[data-glass] :focus-visible{outline:2px solid color-mix(in srgb,var(--glass-accent) 80%,transparent);outline-offset:1px}
+/* 输入框：去掉内层方角 outline，保留宿主 ._wrap_*:focus-within 的外层圆弧边 */
+html[data-glass] input:focus-visible,
+html[data-glass] textarea:focus-visible,
+html[data-glass] [class*=page] input:focus-visible,
+html[data-glass] [class*=page] textarea:focus-visible{
+  outline:none!important;
+  outline-offset:0!important;
+}
+html[data-glass] ::selection{background:color-mix(in srgb,var(--glass-accent) 35%,transparent)}
+
+/* ---------- 10. 边缘渐变、辉光、悬停 ---------- */
+html[data-glass] [data-glass-fade]{
+  position:fixed;left:0;right:0;height:13px;z-index:7;pointer-events:none;
+  backdrop-filter:blur(max(2px, calc(var(--glass-blur) * .35)));
+  -webkit-backdrop-filter:blur(max(2px, calc(var(--glass-blur) * .35)));
+  background:color-mix(in srgb,#fff calc(12% * var(--glass-frost)),transparent);
+}
+html[data-glass] body[data-ds-dark-theme] [data-glass-fade]{
+  background:color-mix(in srgb,#000 calc(18% * var(--glass-frost)),transparent);
+}
+html[data-glass] [data-glass-fade=top]{top:0;-webkit-mask-image:linear-gradient(#000,#0000);mask-image:linear-gradient(#000,#0000)}
+html[data-glass] [data-glass-fade=bottom]{bottom:0;-webkit-mask-image:linear-gradient(#0000,#000);mask-image:linear-gradient(#0000,#000)}
+html[data-glass] [data-glass-spot]{position:relative;isolation:isolate}
+html[data-glass][data-glass-spotlight] [data-glass-spot]::before{
+  content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(var(--gx-glow-radius,180px) at var(--gx-mx,50%) var(--gx-my,50%),
+    var(--glass-spot-color),transparent 70%);
+  opacity:0;transition:opacity .3s;
+}
+html[data-glass][data-glass-spotlight] [data-glass-spot][data-spot-on]::before{opacity:1}
+/* 侧栏辉光：fill=-1，::before=0，内容=1；pointer-events 已在通用 ::before 上 none */
+html[data-glass][data-glass-spotlight] [class*=sidebarCol][data-glass-spot]::before{
+  z-index:0;
+}
+html[data-glass][data-glass-press] [data-glass-spot]{transition:transform .12s ease-out,box-shadow .12s ease-out}
+/* B3/E3：侧栏禁用 transform（保 fill 磨砂，也不把 Windows fixed toggle 困进包含块）。
+   其它玻璃卡仍用 translateY；整块侧栏改用 top 位移上浮。
+   轨迹/composer-overlay 大板只辉光不上浮；输入只抬 composer-card（或带 stats 的 inputbar 外壳）。 */
+html[data-glass][data-glass-press] [data-glass-spot]:not([class*=sidebarCol]):not([data-dsh-trajectory]):hover{
+  transform:translateY(-1px)!important;
+  box-shadow:0 5px 14px #0c142026,inset 0 1px #ffffff5c!important;
+}
+html[data-glass][data-glass-press] [data-dsh-trajectory][data-glass-spot],
+html[data-glass][data-glass-press] [data-dsh-trajectory][data-glass-spot]:hover{
+  transform:none!important;
+}
+html[data-glass][data-glass-press] [class*=sidebarCol],
+html[data-glass][data-glass-press] [class*=sidebarCol]:hover{transform:none!important}
+html[data-glass][data-glass-press] [class*=sidebarCol]:has([role=dialog]){backdrop-filter:none}
+/* 整块左侧栏玻璃板悬停上浮（仅带 fill 的外层列；收起/设置对话框打开时不抬） */
+html[data-glass][data-glass-press] [class*=sidebarCol]:has(> [data-glass-sidebar-fill]){
+  transition:top .12s ease-out,box-shadow .12s ease-out;
+  top:0;
+}
+html[data-glass][data-glass-press] [class*=sidebarCol]:has(> [data-glass-sidebar-fill]):not(:has([role=dialog])):hover{
+  top:-1px;
+  box-shadow:0 5px 14px #0c142026,inset 0 1px #ffffff5c!important;
+}
+html[data-glass][data-glass-press] body[data-ds-dark-theme] [class*=sidebarCol]:has(> [data-glass-sidebar-fill]):not(:has([role=dialog])):hover{
+  box-shadow:0 5px 14px #02060e40,inset 0 1px #ffffff14!important;
+}
+html[data-glass][data-glass-press] [data-sidebar-collapsed] [class*=sidebarCol],
+html[data-glass][data-glass-press] [data-sidebar-collapsed] [class*=sidebarCol]:hover{
+  top:0!important;
+  transition:none;
+}
+@media (prefers-reduced-motion:reduce){
+  html[data-glass][data-glass-press] [data-glass-spot]{transition:none}
+  html[data-glass][data-glass-press] [data-glass-spot]:not([class*=sidebarCol]):not([data-dsh-trajectory]):hover{transform:none!important}
+  html[data-glass][data-glass-press] [class*=sidebarCol]:has(> [data-glass-sidebar-fill]),
+  html[data-glass][data-glass-press] [class*=sidebarCol]:has(> [data-glass-sidebar-fill]):hover{
+    top:0!important;
+    transition:none;
+  }
+  html[data-glass] [data-glass-glow]{transition:none}
+}
+html[data-glass] [data-glass-badge]{
+  position:fixed;z-index:60;pointer-events:none;border-radius:5px;padding:1px;
+  background:linear-gradient(135deg,rgba(255,255,255,.75) 0%,rgba(255,255,255,.08) 35%,rgba(255,255,255,.04) 65%,rgba(255,255,255,.5) 100%);
+  box-shadow:0 0 12px rgba(120,170,255,.20);
+}
+html[data-glass] [data-glass-badge] span{
+  display:flex;align-items:center;justify-content:center;width:100%;height:100%;
+  border-radius:4px;background:rgba(0,0,0,.25);
+  color:rgba(255,255,255,.95);font-family:ui-monospace,'SF Mono','JetBrains Mono',Menlo,Consolas,monospace;
+  font-weight:500;letter-spacing:.02em;line-height:1;white-space:nowrap;
+}
+/* 滚动条也跟着玻璃走（非设置页等仍用系统/标准条着色） */
+html[data-glass] *{scrollbar-color:color-mix(in srgb,var(--dsw-alias-label-tertiary) 30%,transparent) transparent}
+
+/*
+ * Overlay 滚动条：不占 layout 宽；原生条隐藏；自定义细条 z-index 盖过 dialog overlay(1000)。
+ * 宿主：设置 dialog 的 options/navList；左侧会话 GAkraW_list（及 data-gx-sb-host）。
+ * 宿主为原生条预留的 5px（--dsh-session-list-scrollbar-width）一并清零，避免仍被挤开。
+ */
+/* Keep native horizontal bars; only registered hosts lose their vertical bar. */
+/* Standard scrollbar-color overrides WebKit geometry in Chromium.
+ * Reset it on managed hosts and hide width on the base pseudo-element.
+ * No height override: existing horizontal scrollbar sizing stays intact. */
+html[data-glass] [data-gx-sb-host]{scrollbar-color:auto!important;scrollbar-width:auto!important;scrollbar-gutter:auto!important}
+html[data-glass] [data-gx-sb-host]::-webkit-scrollbar{width:0!important}
+/* Chat keeps its pre-overlay text width to avoid virtual-message reflow. */
+html[data-glass] [data-gx-sb-host][data-conversation-scroll]{padding-inline-end:calc(var(--gx-chat-original-padding,0px) + var(--gx-chat-scroll-gutter,0px))!important}
+/* 取消会话列表为原生 5px 条预留的边距 */
+html[data-glass] [class*=GAkraW_root],
+html[data-glass] [data-dsh-sidebar-root]{
+  --dsh-session-list-scrollbar-width:0px!important;
+  --dsh-session-list-scrollbar-offset:0px!important;
+}
+/* 14px hit target, with the same 6px visible thumb as before. */
+html[data-glass] [data-gx-overlay-sb]{
+  position:fixed;width:14px;border-radius:999px;pointer-events:none;
+  opacity:0;transition:opacity .18s ease;z-index:1100;touch-action:none;
+}
+html[data-glass] [data-gx-overlay-sb]::before{
+  content:"";position:absolute;inset:0 2px 0 6px;border-radius:999px;
+  background:color-mix(in srgb,var(--dsw-alias-label-tertiary) 40%,transparent);
+  box-shadow:0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 10%,transparent);
+}
+html[data-glass] [data-gx-overlay-sb][data-visible],
+html[data-glass] [data-gx-overlay-sb]:focus-visible{
+  opacity:1;pointer-events:auto;cursor:grab;
+}
+html[data-glass] [data-gx-overlay-sb][data-dragging]{cursor:grabbing}
+html[data-glass] [data-gx-overlay-sb]:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:1px}
+@media(prefers-reduced-motion:reduce){html[data-glass] [data-gx-overlay-sb]{transition:none}}
+
+/* 官方设置 · 账号与余额：沿用现有两组容器，只统一成消息提示页的浅底卡。
+   精确限定设置弹窗与直属卡片；不影响充值主按钮、登录弹窗或平台付款页。
+   官方类名变更时本规则自然失效，保留官方界面。 */
+html[data-glass] [data-shortcut-modal="settings"] section._6qcDqa_section
+> :is(._6qcDqa_card,._6qcDqa_balanceCard){
+  background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 34%,transparent);
+  border-color:transparent;
+  border-radius:12px;
+  box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 10%,transparent);
+}
+
+/* 官方设置关闭的开关保留可辨认的底色，不改变共享边框变量。 */
+html[data-glass] [data-shortcut-modal="settings"] button[class*="_switch_"][role="switch"][aria-checked="false"]{
+  background:color-mix(in srgb,var(--dsw-alias-label-primary) 22%,transparent);
+}
+
+/* 官方设置 · 通用：原有内容容器就是一张卡，不增加标题、不移动设置项。 */
+html[data-glass] [data-shortcut-modal="settings"] .RmVo8q_section{
+  box-sizing:border-box;
+  padding:2px 18px 4px;
+  border-radius:12px;
+  background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 34%,transparent);
+  box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--dsw-alias-label-primary) 10%,transparent);
+}
+/* 未选中的外观选项沿用设置页控件底色；选中、悬停及焦点保持官方状态。 */
+html[data-glass] [data-shortcut-modal="settings"] .RmVo8q_section
+  .Iwzhua_themeCube:not(.Iwzhua_selected):not(:hover){
+  background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);
+}
+
+/* 官方通用设置：只覆盖同类控件平时底色；悬停或焦点交还官方样式。 */
+html[data-glass] [data-shortcut-modal="settings"] .RmVo8q_section
+  :is(._1jfq5W_selector,.CDP_Dq_selector,.-TO4SG_selector,.V68kMG_selector,.St8tea_button,._7qxJPq_stepper):not(:hover):not(:focus-within){
+  background:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);
+}
+/* 已选主题平时及悬停时均保留重点色。 */
+html[data-glass] [data-shortcut-modal="settings"] .RmVo8q_section
+  .Iwzhua_themeCube.Iwzhua_selected{
+  background:var(--glass-accent);
+  color:var(--dsw-alias-label-primary-foreground);
+}
+
+/* 模型设置页：只统一外层卡片和普通控件的平时底色。 */
+html[data-glass] [data-shortcut-modal="settings"] .jrmgQW_section :is(.jrmgQW_rowCard,.jrmgQW_addCard,.jrmgQW_setupCard) {
+  background-color: color-mix(in srgb,var(--dsw-alias-bg-layer-1) 34%,transparent);
+}
+html[data-glass] [data-shortcut-modal="settings"] .jrmgQW_section :is(.jrmgQW_secondaryButton:not(:hover),.jrmgQW_addButton:not(:hover),.jrmgQW_input:not(:hover):not(:focus-within)):not(:disabled) {
+  background-color: color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);
+}
+
+/* 模型页：保留编辑区层次，删除按钮使用系统主按钮配色。 */
+html[data-glass] [data-shortcut-modal="settings"] .jrmgQW_section .jrmgQW_rowCard .jrmgQW_editor {
+  background-color:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 60%,transparent);
+}
+html[data-glass] [data-shortcut-modal="settings"] .jrmgQW_section .jrmgQW_rowActions .jrmgQW_dangerButton:not(:disabled) {
+  background-color:var(--dsw-alias-button-primary-fill);
+  color:var(--dsw-alias-label-primary-foreground);
+}
+html[data-glass] [data-shortcut-modal="settings"] .jrmgQW_section .jrmgQW_rowActions .jrmgQW_dangerButton:hover:not(:disabled) {
+  background-color:var(--dsw-alias-button-primary-hover);
+}
+
+/* 官方设置 · 内置插件：只统一列表卡片、展开详情和普通控件的底色。 */
+html[data-glass] [data-shortcut-modal="settings"] .qgYWUG_section .qgYWUG_card {
+  background-color:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 34%,transparent);
+}
+html[data-glass] [data-shortcut-modal="settings"] .qgYWUG_section .qgYWUG_cardDetails {
+  background-color:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 60%,transparent);
+}
+html[data-glass] [data-shortcut-modal="settings"] .qgYWUG_section :is(.qgYWUG_search input,.qgYWUG_switcher):not(:disabled):not(:hover):not(:focus-within) {
+  background-color:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);
+}
+
+/* 内置插件列表的标识与状态标签：柔化底色，保留各状态文字颜色。 */
+html[data-glass] [data-shortcut-modal="settings"] .qgYWUG_section .qgYWUG_cardIdentity,
+html[data-glass] [data-shortcut-modal="settings"] .qgYWUG_section .qgYWUG_cardTrailing ._tag_brmue_4[data-tone="neutral"] {
+  background-color:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 45%,transparent);
+}
+html[data-glass] [data-shortcut-modal="settings"] .qgYWUG_section .qgYWUG_cardTrailing ._tag_brmue_4:is([data-tone="warning"],[data-tone="info"],[data-tone="danger"]) {
+  background-color:color-mix(in srgb,currentColor 6%,transparent);
+}
+
+/* 官方 Agent 预设：卡片、创建入口和两个弹窗内的阅读区域。 */
+html[data-glass] [data-shortcut-modal="settings"] .Wsg8iW_section :is(.Wsg8iW_card:not(:hover),.Wsg8iW_cardActive) {
+  background-color:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 34%,transparent);
+}
+html[data-glass] [data-shortcut-modal="settings"] .Wsg8iW_section .Wsg8iW_creatorButton:not(:disabled):not(:hover):not(:focus-within) {
+  background-color:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);
+}
+html[data-glass] .Fi3Lcq_guideDialog .Fi3Lcq_guidePanel blockquote,
+html[data-glass] .Wsg8iW_dialog .Wsg8iW_viewerCode {
+  background-color:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 60%,transparent);
+}
+
+/* Agent 预设指南：仅调整分段栏底色与状态颜色。 */
+html[data-glass] .Fi3Lcq_guideDialog .Fi3Lcq_guideTabs {
+  background-color:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 80%,transparent);
+}
+html[data-glass] .Fi3Lcq_guideDialog .Fi3Lcq_guideTabs ._indicator_1p79o_9 {
+  background-color:var(--dsw-alias-button-primary-fill);
+}
+html[data-glass] .Fi3Lcq_guideDialog .Fi3Lcq_guideTabs [role="tab"][aria-selected="true"] {
+  color:var(--dsw-alias-label-primary-foreground);
+}
+html[data-glass] .Fi3Lcq_guideDialog .Fi3Lcq_guideTabs [role="tab"][aria-selected="false"]:hover {
+  background-color:var(--dsw-alias-interactive-bg-hover);
+}
+
+/* Agent 预设指南：柔化示例任务标签的底色。 */
+html[data-glass] .Fi3Lcq_guideDialog .Fi3Lcq_guideExampleTag[data-tone="neutral"] {
+  background-color:color-mix(in srgb,var(--dsw-alias-bg-layer-1) 45%,transparent);
+}

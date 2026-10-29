@@ -1,0 +1,88 @@
+{
+  "name": "dsh-glass-theme",
+  "version": "1.0.1",
+  "type": "module",
+  "description": "DSH 玻璃主题：壁纸 + 磨砂玻璃界面，带重点色、悬停上浮与鼠标辉光。壁纸保存在插件目录 壁纸/。",
+  "author": "Song-812",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Song-812/dsh-plugins-song.git",
+    "directory": "glass-theme"
+  },
+  "homepage": "https://github.com/Song-812/dsh-plugins-song/tree/main/glass-theme",
+  "bugs": {
+    "url": "https://github.com/Song-812/dsh-plugins-song/issues"
+  },
+  "engines": {
+    "node": ">=18",
+    "dsh": ">=0.2.1-rc.3 <0.3.0"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "plugin",
+    "theme",
+    "glass",
+    "wallpaper",
+    "frosted-glass"
+  ],
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src",
+    "locale",
+    "assets",
+    "壁纸/默认壁纸.jpg",
+    "docs",
+    "cordis.patch.yml",
+    "build.mjs",
+    "check.mjs",
+    "tsconfig.json",
+    "README.md",
+    "README.en.md"
+  ],
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": []
+    }
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"test/*.test.mjs\"",
+    "check": "node check.mjs",
+    "selfcheck": "node check.mjs"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test",
+    "doc": "docs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@types/react": "^18.3.12",
+    "esbuild": "^0.25.10",
+    "typescript": "^5.9.3"
+  },
+  "allowScripts": {
+    "esbuild@0.25.10": true
+  }
+}
