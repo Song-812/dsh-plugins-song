@@ -234,3 +234,28 @@ test('探测段缺失/桥没带回 binProbe 时 binStatus 为 unknown，且不�
   assert.equal(result.binStatus, 'unknown')
   assert.equal(result.permanent, false)
 })
+
+test('桥部分失败且仅缓存移走：不得误报成功或广播移除', async () => {
+  const home=await freshHome(),id='partial-case';const dir=await seedSession(home,id);let events=0;
+  const cache=join(home,'storages','session_projcache','sessions',id+'.json');await mkdir(join(home,'storages','session_projcache','sessions'),{recursive:true});await writeFile(cache,'{}');
+  const ctx=ctxWithAgents(['idle']);ctx.emit=()=>{events++};
+  await assert.rejects(()=>deleteSession(ctx,id,{bridge:async()=>({ok:false,deleted:[cache],failed:[],error:'fixture index failed'})}),{code:'move-failed'});
+  assert.equal(existsSync(dir),true);assert.equal(events,0);
+});
+test('桥声称成功但未报告处理会话目录：不能误报成功', async () => {
+  const home=await freshHome(),id='missing-result';const dir=await seedSession(home,id);let events=0;const ctx=ctxWithAgents(['idle']);ctx.emit=()=>{events++};
+  await assert.rejects(()=>deleteSession(ctx,id,{bridge:async()=>({ok:true,deleted:[],failed:[]})}),{code:'move-failed'});
+  assert.equal(existsSync(dir),true);assert.equal(events,0);
+});
+
+test('会话目录已回收，仅缓存无法回收：仍同步列表并记录警告', async () => {
+  const home=await freshHome(),id='cache-only-fail';const dir=await seedSession(home,id);const cache=join(home,'storages','session_projcache','sessions',id+'.json');await mkdir(join(home,'storages','session_projcache','sessions'),{recursive:true});await writeFile(cache,'{}');
+  let events=0,warnings=0;const ctx=ctxWithAgents(['idle']);ctx.emit=()=>{events++};ctx.logger.warn=()=>{warnings++};
+  const result=await deleteSession(ctx,id,{bridge:async()=>({ok:false,deleted:[dir],failed:[{path:cache,error:'still on disk'}],error:'partial: still on disk: cache',permanent:false})});
+  assert.equal(result.moved.includes(dir),true);assert.equal(events,1);assert.equal(warnings,1);
+});
+test('会话目录已报告移走但桥发生非部分处理错误：不能盲目报成功', async () => {
+  const home=await freshHome(),id='unknown-bridge-fail';const dir=await seedSession(home,id);const cache=join(home,'storages','session_projcache','sessions',id+'.json');await mkdir(join(home,'storages','session_projcache','sessions'),{recursive:true});await writeFile(cache,'{}');
+  let events=0;const ctx=ctxWithAgents(['idle']);ctx.emit=()=>{events++};
+  await assert.rejects(()=>deleteSession(ctx,id,{bridge:async()=>({ok:false,deleted:[dir],failed:[{path:cache,error:'still on disk'}],error:'unexpected failure'})}),{code:'move-failed'});assert.equal(events,0);
+});
