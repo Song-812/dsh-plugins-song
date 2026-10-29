@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "dsh-global-rules",
+    "description": "在 DSH「设置 → 全局规则」页里直接编辑 AGENTS.md，支持恢复默认（清空前自动备份）。"
+  }
+}

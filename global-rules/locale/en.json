@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "dsh-global-rules",
+    "description": "Edit AGENTS.md right from DSH Settings → Global Rules, with restore-defaults (backs up before clearing)."
+  }
+}
