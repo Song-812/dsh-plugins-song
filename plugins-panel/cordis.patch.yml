@@ -1,0 +1,5 @@
+# dsh-plugins-panel bundle patch: inserts this plugin into a profile's layer stack.
+# The row id is the package name so the client bundle can attach to it.
+- insert:
+    - id: dsh-plugins-panel
+      name: 'dsh-plugins-panel'
