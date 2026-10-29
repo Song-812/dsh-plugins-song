@@ -19,7 +19,7 @@ DSH desktop does not ship every small capability you want day to day. This repo 
 | Boot Animation (启动动画) | — | 🚧 Coming soon | |
 | Glass Theme (玻璃主题) | — | 🚧 Coming soon | |
 | Global Rules (全局规则) | [`global-rules/`](./global-rules/) · `dsh-global-rules` | ✅ Available | Settings-page editor for AGENTS.md; save / restore defaults (backs up before clearing) |
-| Thinking Levels (思考档位) | — | 🚧 Coming soon | |
+| Thinking Levels (思考档位) | [`reasoning-effort/`](./reasoning-effort/) · `dsh-reasoning-effort` | ✅ Available | Composer model seat: reasoning-effort slider + turbo lightning |
 | Skills Sidebar (技能侧栏) | [`skills-toggle/`](./skills-toggle/) · `dsh-skills-toggle` | ✅ Available | Sidebar toggles for model / manual invocation; group collapse, bulk knob, drag reorder, search |
 | Plugins Sidebar (插件侧栏) | [`plugins-panel/`](./plugins-panel/) · `dsh-plugins-panel` | ✅ Available | Sidebar toggles for self-made plugins; group collapse, bulk knob, drag reorder, search, plus jump to official manager |
 | MCP Sidebar (MCP侧栏) | [`mcp-toggle/`](./mcp-toggle/) · `dsh-mcp-toggle` | ✅ Available | Sidebar MCP enable/disable; group collapse, bulk knob, drag reorder, search |
@@ -52,6 +52,7 @@ DSH desktop does not ship every small capability you want day to day. This repo 
     proxy-connect/    Proxy Connect plugin (published)
     web-connect/      Web Connect plugin (published)
     ui-hide/          UI Hide plugin (published)
+    reasoning-effort/ Thinking Levels plugin (published)
     LICENSE           MIT
     README.md         Chinese
     README.en.md      English

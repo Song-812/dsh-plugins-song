@@ -1,0 +1,4 @@
+{
+  "$comment": "Locale override anchor for DSH; English package blurb still comes from package.json.",
+  "meta": {}
+}
