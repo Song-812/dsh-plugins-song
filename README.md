@@ -4,7 +4,7 @@
 
 Song 自制的 DSH 插件合集，持续更新。
 
-> **平台说明**：`session-delete` 依赖 Windows 回收站（`powershell.exe` + `shell32`），其它平台请勿装它。`msg-notify` 是纯客户端提醒；`skills-toggle` / `mcp-toggle` / `plugins-panel` 只写各自的 `~/.dsh/*.json` 显示偏好（及 skills 的 front matter）；`global-rules` 编辑 `$DSH_HOME/AGENTS.md`（默认 `~/.dsh/AGENTS.md`）；`proxy-connect` 按名单分流抓网页与模型出网（默认本机代理端口，Node ≥ 22.19）——以上都不依赖回收站。
+> **平台说明**：`session-delete` 依赖 Windows 回收站（`powershell.exe` + `shell32`），其它平台请勿装它。`msg-notify` 是纯客户端提醒；`skills-toggle` / `mcp-toggle` / `plugins-panel` 只写各自的 `~/.dsh/*.json` 显示偏好（及 skills 的 front matter）；`global-rules` 编辑 `$DSH_HOME/AGENTS.md`（默认 `~/.dsh/AGENTS.md`）；`proxy-connect` 按名单分流抓网页与模型出网（默认本机代理端口，Node ≥ 22.19）；`web-connect` 用本机一次性登录入口做界面验证 / 默认浏览器打开（验证模式需 chrome-devtools MCP）——以上都不依赖回收站。
 
 ## 它解决什么问题
 
@@ -25,7 +25,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
 | MCP 侧栏 (MCP Sidebar) | [`mcp-toggle/`](./mcp-toggle/) · `dsh-mcp-toggle` | ✅ 已发布 | 侧栏管理 MCP 服务器开关；分组折叠、一键开关、拖动排序与搜索 |
 | UI 隐藏 (UI Hide) | — | 🚧 即将开源 | |
 | 代理连接 (Proxy Connect) | [`proxy-connect/`](./proxy-connect/) · `dsh-proxy-connect` | ✅ 已发布 | 一个开关 + 一份名单：抓网页与模型出网分流（名单内走代理） |
-| 网页连接 (Web Connect) | — | 🚧 即将开源 | |
+| 网页连接 (Web Connect) | [`web-connect/`](./web-connect/) · `dsh-web-connect` | ✅ 已发布 | 验证自身界面（chrome-devtools）与按用户要求在默认浏览器打开已登录网页版 |
 | MCP-OAuth 桥接 (MCP-OAuth Bridge) | — | 🚧 即将开源 | |
 
 持续更新，敬请期待。
@@ -39,7 +39,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
 
 | 需要 | 说明 |
 |---|---|
-| Windows（仅 `session-delete`） | 回收站桥依赖 `powershell.exe` 与 `shell32.dll`。`msg-notify` 是纯客户端；`skills-toggle` / `mcp-toggle` / `plugins-panel` 只写各自的 `~/.dsh/*.json` 显示偏好（及 skills 的 front matter）；`global-rules` 编辑 `$DSH_HOME/AGENTS.md`（默认 `~/.dsh/AGENTS.md`）；`proxy-connect` 按名单分流抓网页与模型出网（默认本机代理端口，Node ≥ 22.19）——以上都不依赖回收站 |
+| Windows（仅 `session-delete`） | 回收站桥依赖 `powershell.exe` 与 `shell32.dll`。`msg-notify` 是纯客户端；`skills-toggle` / `mcp-toggle` / `plugins-panel` 只写各自的 `~/.dsh/*.json` 显示偏好（及 skills 的 front matter）；`global-rules` 编辑 `$DSH_HOME/AGENTS.md`（默认 `~/.dsh/AGENTS.md`）；`proxy-connect` 按名单分流抓网页与模型出网（默认本机代理端口，Node ≥ 22.19）；`web-connect` 用本机一次性登录入口做界面验证 / 默认浏览器打开（验证模式需 chrome-devtools MCP）——以上都不依赖回收站 |
 | Node.js ≥ 18 | 跑插件测试时需要；装插件本身走 DSH |
 | Node.js ≥ 22.19（仅 `proxy-connect`） | undici 8 要求；DSH 自带 Node 24 满足 |
 
@@ -52,6 +52,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
     plugins-panel/    插件侧栏插件（已发布）
     global-rules/     全局规则插件（已发布）
     proxy-connect/    代理连接插件（已发布）
+    web-connect/      网页连接插件（已发布）
     LICENSE           MIT
     README.md         中文说明
     README.en.md      English
@@ -62,7 +63,7 @@ DSH 桌面端没有现成的「一键删会话并进回收站」之类能力。�
 
 ## 已知限制
 
-- `session-delete` **只在 Windows 上能用**（依赖系统回收站）。`msg-notify` 是纯客户端提醒；`skills-toggle` / `mcp-toggle` / `plugins-panel` 只写各自的 `~/.dsh/*.json` 显示偏好（及 skills 的 front matter）；`global-rules` 编辑 `$DSH_HOME/AGENTS.md`（默认 `~/.dsh/AGENTS.md`）；`proxy-connect` 按名单分流抓网页与模型出网（默认本机代理端口，Node ≥ 22.19）——以上都不依赖回收站
+- `session-delete` **只在 Windows 上能用**（依赖系统回收站）。`msg-notify` 是纯客户端提醒；`skills-toggle` / `mcp-toggle` / `plugins-panel` 只写各自的 `~/.dsh/*.json` 显示偏好（及 skills 的 front matter）；`global-rules` 编辑 `$DSH_HOME/AGENTS.md`（默认 `~/.dsh/AGENTS.md`）；`proxy-connect` 按名单分流抓网页与模型出网（默认本机代理端口，Node ≥ 22.19）；`web-connect` 用本机一次性登录入口（验证模式需 chrome-devtools MCP）——以上都不依赖回收站
 - 「即将开源」的条目还在整理，目录与包名以后补上
 
 ## 许可证
