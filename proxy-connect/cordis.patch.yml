@@ -1,0 +1,6 @@
+# dsh-proxy-connect bundle patch：把本插件插进 profile 的层栈。
+# 行 id 用包名，方便插件面板按 link 依赖把它认成自制插件。
+# 2026-10-26 改名：目录 代理开关 → 代理连接，包名 dsh-proxy-switch → dsh-proxy-connect。
+- insert:
+    - id: dsh-proxy-connect
+      name: 'dsh-proxy-connect'

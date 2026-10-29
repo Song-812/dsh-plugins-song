@@ -1,0 +1,6 @@
+# 运行时诊断日志（每次启动都会写）
+debug.log
+
+# 依赖与本地覆盖
+node_modules/
+proxy.json
